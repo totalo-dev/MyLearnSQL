@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentação MySQL - Guia Completo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00758F;
+            --primary-dark: #005A6F;
+            --secondary: #F29111;
+            --bg-dark: #0F1419;
+            --bg-card: #1A1F2E;
+            --bg-code: #161B22;
+            --text-primary: #E6EDF3;
+            --text-secondary: #8B949E;
+            --border: #30363D;
+            --success: #3FB950;
+            --warning: #D29922;
+            --danger: #F85149;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0F1419 0%, #1A1F2E 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            background: rgba(26, 31, 46, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1.5rem 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border);
+        }
+
+        .nav-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .nav-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a:hover {
+            background: var(--bg-dark);
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .nav-links a::before {
+            content: "▸";
+            color: var(--secondary);
+        }
+
+        /* Main Content */
+        main {
+            padding: 2rem 0 4rem;
+        }
+
+        .section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .section-title {
+            flex: 1;
+        }
+
+        .section-title h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .section-title p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .subsection {
+            margin-bottom: 2.5rem;
+        }
+
+        .subsection:last-child {
+            margin-bottom: 0;
+        }
+
+        .subsection-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .subsection-title::before {
+            content: "●";
+            font-size: 0.75rem;
+        }
+
+        .description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: var(--bg-code);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .code-header {
+            background: rgba(48, 54, 61, 0.5);
+            padding: 0.75rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .code-lang {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 0.375rem 0.875rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        pre {
+            margin: 0;
+            padding: 1.5rem;
+            overflow-x: auto;
+        }
+
+        code {
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        /* SQL Syntax Highlighting */
+        .keyword { color: #FF79C6; font-weight: 500; }
+        .string { color: #50FA7B; }
+        .number { color: #BD93F9; }
+        .comment { color: #6272A4; font-style: italic; }
+        .function { color: #8BE9FD; }
+
+        /* Tags */
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tag-ddl {
+            background: rgba(63, 185, 80, 0.1);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .tag-dml {
+            background: rgba(242, 145, 17, 0.1);
+            color: var(--secondary);
+            border: 1px solid var(--secondary);
+        }
+
+        /* Summary Box */
+        .summary-box {
+            background: linear-gradient(135deg, rgba(0, 117, 143, 0.1), rgba(242, 145, 17, 0.1));
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .summary-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .summary-item h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .summary-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+
+            .nav-links {
+                grid-template-columns: 1fr;
+            }
+
+            pre {
+                padding: 1rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">SQL</div>
+                    <div>
+                        <h1>Documentação MySQL</h1>
+                        <p class="subtitle">Estudos baseados no curso do Gustavo Guanabara</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav>
+            <div class="nav-title">Navegação Rápida</div>
+            <div class="nav-links">
+                <a href="#ddl">DDL - Estrutura</a>
+                <a href="#create">CREATE TABLE</a>
+                <a href="#alter">ALTER TABLE</a>
+                <a href="#modify">MODIFY COLUMN</a>
+                <a href="#change">CHANGE COLUMN</a>
+                <a href="#rename">RENAME TABLE</a>
+                <a href="#drop">DROP TABLE</a>
+                <a href="#dml">DML - Dados</a>
+                <a href="#insert">INSERT</a>
+                <a href="#select">SELECT</a>
+                <a href="#update">UPDATE</a>
+                <a href="#delete">DELETE</a>
+                <a href="#truncate">TRUNCATE</a>
+                <a href="#dql">DQL - Consultas</a>
+                <a href="#select-columns">SELECT Colunas</a>
+                <a href="#where">WHERE</a>
+                <a href="#between">BETWEEN</a>
+                <a href="#order-by">ORDER BY</a>
+                <a href="#limit">LIMIT</a>
+                <a href="#like">LIKE</a>
+                <a href="#in">IN</a>
+                <a href="#exercises">Exercícios Práticos</a>
+                <a href="#aggregate">Funções Agregação</a>
+                <a href="#max">MAX()</a>
+                <a href="#min">MIN()</a>
+                <a href="#avg">AVG()</a>
+                <a href="#count">COUNT()</a>
+                <a href="#subquery">Subconsultas</a>
+                <a href="#tips">Dicas</a>
+                <a href="#groupby">GROUP BY</a>
+                <a href="#having">HAVING</a>
+                <a href="#round">ROUND()</a>
+                <a href="#where-vs-having">WHERE vs HAVING</a>
+            </div>
+        </nav>
+
+        <main></main>
+
+            <!-- PARTE 1: DDL -->
+            <section id="ddl" class="section">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <div class="section-title">
+                        <h2>DDL - Data Definition Language</h2>
+                        <p>Comandos para definir e modificar a estrutura do banco de dados</p>
+                    </div>
+                    <span class="tag tag-ddl">ESTRUTURA</span>
+                </div>
+
+                <!-- 1.1 CREATE TABLE -->
+                <div id="create" class="subsection">
+                    <h3 class="subsection-title">CREATE TABLE: Criando tabelas</h3>
+                    <p class="description">Primeiro passo: criar a estrutura da tabela com colunas, tipos de dados e constraints.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="keyword">CREATE TABLE</span> pessoas (
+    id <span class="keyword">INT NOT NULL AUTO_INCREMENT</span>,
+    nome <span class="keyword">VARCHAR</span>(<span class="number">30</span>) <span class="keyword">NOT NULL</span>,
+    nascimento <span class="keyword">DATE</span>,
+    sexo <span class="keyword">ENUM</span>(<span class="string">'M'</span>, <span class="string">'F'</span>),
+    peso <span class="keyword">DECIMAL</span>(<span class="number">5</span>, <span class="number">2</span>),
+    altura <span class="keyword">DECIMAL</span>(<span class="number">3</span>, <span class="number">2</span>),
+    nacionalidade <span class="keyword">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">DEFAULT</span> <span class="string">'Brasil'</span>,
+    <span class="keyword">PRIMARY KEY</span> (id)
+) <span class="keyword">DEFAULT CHARSET</span> = utf8;</code></pre>
+                    </div>
+                </div>
+
+                <!-- 1.2 ALTER TABLE -->
+                <div id="alter" class="subsection">
+                    <h3 class="subsection-title">ALTER TABLE: Modificando estrutura</h3>
+                    <p class="description">Após criar a tabela, podemos adicionar, remover ou modificar colunas.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Adicionando uma nova coluna no final</span>
+<span class="keyword">ALTER TABLE</span> pessoas
+<span class="keyword">ADD COLUMN</span> profissao <span class="keyword">VARCHAR</span>(<span class="number">10</span>);
+
+<span class="comment">-- Removendo uma coluna</span>
+<span class="keyword">ALTER TABLE</span> pessoas
+<span class="keyword">DROP COLUMN</span> profissao;
+
+<span class="comment">-- Adicionando coluna em posição específica</span>
+<span class="keyword">ALTER TABLE</span> pessoas
+<span class="keyword">ADD COLUMN</span> profissao <span class="keyword">VARCHAR</span>(<span class="number">10</span>) <span class="keyword">AFTER</span> nome;
+
+<span class="comment">-- Adicionando coluna como primeira da tabela</span>
+<span class="keyword">ALTER TABLE</span> pessoas
+<span class="keyword">ADD COLUMN</span> codigo <span class="keyword">INT FIRST</span>;</code></pre>
+                    </div>
+                </div>
+
+                <!-- 1.3 MODIFY COLUMN -->
+                <div id="modify" class="subsection">
+                    <h3 class="subsection-title">MODIFY COLUMN: Alterando características</h3>
+                    <p class="description">Modificando tipo, tamanho, NOT NULL e DEFAULT de uma coluna já existente.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="keyword">ALTER TABLE</span> pessoas
+<span class="keyword">MODIFY COLUMN</span> profissao <span class="keyword">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT NULL DEFAULT</span> <span class="string">''</span>;</code></pre>
+                    </div>
+                </div>
+
+                <!-- 1.4 CHANGE COLUMN -->
+                <div id="change" class="subsection">
+                    <h3 class="subsection-title">CHANGE COLUMN: Renomeando colunas</h3>
+                    <p class="description">Alterando o nome de uma coluna (e suas características se necessário).</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="keyword">ALTER TABLE</span> pessoas
+<span class="keyword">CHANGE COLUMN</span> nacionalidade nascionalidade <span class="keyword">VARCHAR</span>(<span class="number">20</span>);</code></pre>
+                    </div>
+                </div>
+
+                <!-- 1.5 RENAME TABLE -->
+                <div id="rename" class="subsection">
+                    <h3 class="subsection-title">RENAME TABLE: Renomeando tabelas</h3>
+                    <p class="description">Alterando o nome da tabela inteira.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="keyword">DESC</span> familia;
+
+<span class="keyword">ALTER TABLE</span> pessoas
+<span class="keyword">RENAME TO</span> familia;
+
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> familia;</code></pre>
+                    </div>
+                </div>
+
+                <!-- 1.6 CREATE TABLE Avançado -->
+                <div class="subsection">
+                    <h3 class="subsection-title">CREATE TABLE com constraints avançadas</h3>
+                    <p class="description">Criando tabela com UNIQUE, UNSIGNED e adicionando chave primária depois.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="keyword">CREATE TABLE IF NOT EXISTS</span> cursos (
+    nome <span class="keyword">VARCHAR</span>(<span class="number">30</span>) <span class="keyword">NOT NULL UNIQUE</span>,
+    descricao <span class="keyword">TEXT</span>,
+    carga <span class="keyword">INT UNSIGNED</span>,
+    totaulas <span class="keyword">INT UNSIGNED</span>,
+    ano <span class="keyword">YEAR DEFAULT</span> <span class="string">'2026'</span>
+) <span class="keyword">DEFAULT CHARSET</span> = utf8;
+
+<span class="comment">-- Adicionando coluna de ID posteriormente</span>
+<span class="keyword">ALTER TABLE</span> cursos
+<span class="keyword">ADD COLUMN</span> idcursos <span class="keyword">INT FIRST</span>;
+
+<span class="comment">-- Definindo a chave primária após a criação</span>
+<span class="keyword">ALTER TABLE</span> cursos
+<span class="keyword">ADD PRIMARY KEY</span> (idcursos);</code></pre>
+                    </div>
+                </div>
+
+                <!-- 1.7 DROP TABLE -->
+                <div id="drop" class="subsection">
+                    <h3 class="subsection-title">DROP TABLE: Deletando tabelas</h3>
+                    <p class="description">Removendo completamente uma tabela (estrutura e dados). ⚠️ Use com cuidado!</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="keyword">CREATE TABLE IF NOT EXISTS</span> teste (
+    id <span class="keyword">INT</span>,
+    nome <span class="keyword">VARCHAR</span>(<span class="number">10</span>),
+    idade <span class="keyword">INT</span>
+);
+
+<span class="keyword">INSERT INTO</span> teste <span class="keyword">VALUES</span>
+(<span class="string">'1'</span>, <span class="string">'Pedro'</span>, <span class="string">'22'</span>),
+(<span class="string">'2'</span>, <span class="string">'Maria'</span>, <span class="string">'12'</span>),
+(<span class="string">'3'</span>, <span class="string">'Maricota'</span>, <span class="string">'77'</span>);
+
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> teste;
+
+<span class="comment">-- CUIDADO: DROP TABLE remove tudo permanentemente!</span>
+<span class="keyword">DROP TABLE IF EXISTS</span> teste;</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PARTE 2: DML -->
+            <section id="dml" class="section">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <div class="section-title">
+                        <h2>DML - Data Manipulation Language</h2>
+                        <p>Comandos para manipular os dados dentro das tabelas</p>
+                    </div>
+                    <span class="tag tag-dml">DADOS</span>
+                </div>
+
+                <!-- 2.1 INSERT -->
+                <div id="insert" class="subsection">
+                    <h3 class="subsection-title">INSERT INTO: Inserindo dados</h3>
+                    <p class="description">Adicionando registros na tabela usando DEFAULT para valores automáticos.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="keyword">INSERT INTO</span> pessoas <span class="keyword">VALUES</span>
+(<span class="keyword">DEFAULT</span>, <span class="string">'Andressa'</span>, <span class="string">'2001-04-16'</span>, <span class="string">'F'</span>, <span class="string">'45.5'</span>, <span class="string">'1.62'</span>, <span class="keyword">DEFAULT</span>);</code></pre>
+                    </div>
+                </div>
+
+                <!-- 2.2 SELECT -->
+                <div id="select" class="subsection">
+                    <h3 class="subsection-title">SELECT: Consultando dados</h3>
+                    <p class="description">Visualizando os dados inseridos na tabela.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> pessoas;</code></pre>
+                    </div>
+                </div>
+
+                <!-- 2.3 INSERT Múltiplo -->
+                <div class="subsection">
+                    <h3 class="subsection-title">INSERT múltiplo: Vários registros de uma vez</h3>
+                    <p class="description">Inserindo múltiplos registros em uma única instrução.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="keyword">INSERT INTO</span> cursos <span class="keyword">VALUES</span>
+(<span class="string">'1'</span>,  <span class="string">'HTML4'</span>,         <span class="string">'Curso de HTML5'</span>,                     <span class="string">'40'</span>, <span class="string">'37'</span>, <span class="string">'2014'</span>),
+(<span class="string">'2'</span>,  <span class="string">'Algoritmos'</span>,    <span class="string">'Lógica de Programação'</span>,              <span class="string">'20'</span>, <span class="string">'15'</span>, <span class="string">'2014'</span>),
+(<span class="string">'3'</span>,  <span class="string">'Photoshop'</span>,     <span class="string">'Dicas de Photoshop CC'</span>,              <span class="string">'10'</span>, <span class="string">'8'</span>,  <span class="string">'2014'</span>),
+(<span class="string">'4'</span>,  <span class="string">'PGP'</span>,           <span class="string">'Curso de PHP para iniciantes'</span>,       <span class="string">'40'</span>, <span class="string">'20'</span>, <span class="string">'2010'</span>),
+(<span class="string">'5'</span>,  <span class="string">'Jarva'</span>,         <span class="string">'Introdução à Linguagem Java'</span>,        <span class="string">'10'</span>, <span class="string">'29'</span>, <span class="string">'2000'</span>),
+(<span class="string">'6'</span>,  <span class="string">'MySQL'</span>,         <span class="string">'Bancos de Dados MySQL'</span>,              <span class="string">'30'</span>, <span class="string">'15'</span>, <span class="string">'2016'</span>),
+(<span class="string">'7'</span>,  <span class="string">'Word'</span>,          <span class="string">'Curso completo de Word'</span>,             <span class="string">'40'</span>, <span class="string">'30'</span>, <span class="string">'2016'</span>),
+(<span class="string">'8'</span>,  <span class="string">'Sapateado'</span>,     <span class="string">'Danças Rítmicas'</span>,                    <span class="string">'40'</span>, <span class="string">'30'</span>, <span class="string">'2018'</span>),
+(<span class="string">'9'</span>,  <span class="string">'Cozinha Árabe'</span>, <span class="string">'Aprenda a fazer Kibe'</span>,               <span class="string">'40'</span>, <span class="string">'30'</span>, <span class="string">'2018'</span>),
+(<span class="string">'10'</span>, <span class="string">'YouTuber'</span>,      <span class="string">'Gerar polêmica e ganhar inscritos'</span>,  <span class="string">'5'</span>,  <span class="string">'2'</span>,  <span class="string">'2018'</span>);</code></pre>
+                    </div>
+                </div>
+
+                <!-- 2.4 UPDATE -->
+                <div id="update" class="subsection">
+                    <h3 class="subsection-title">UPDATE: Modificando dados existentes</h3>
+                    <p class="description">Alterando valores de registros já inseridos na tabela.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Modificando uma única coluna</span>
+<span class="keyword">UPDATE</span> cursos 
+<span class="keyword">SET</span> nome = <span class="string">'HTML 5'</span>
+<span class="keyword">WHERE</span> idcursos = <span class="string">'1'</span>;
+
+<span class="comment">-- Modificando múltiplas colunas ao mesmo tempo</span>
+<span class="keyword">UPDATE</span> cursos 
+<span class="keyword">SET</span> nome = <span class="string">'PHP'</span>, ano = <span class="string">'2015'</span>
+<span class="keyword">WHERE</span> idcursos = <span class="string">'4'</span>;
+
+<span class="comment">-- Usando LIMIT para limitar quantas linhas serão afetadas</span>
+<span class="keyword">UPDATE</span> cursos 
+<span class="keyword">SET</span> nome = <span class="string">'Java'</span>, carga = <span class="string">'40'</span>, ano = <span class="string">'2015'</span>
+<span class="keyword">WHERE</span> idcursos = <span class="string">'5'</span>
+<span class="keyword">LIMIT</span> <span class="number">1</span>;</code></pre>
+                    </div>
+                </div>
+
+                <!-- 2.5 DELETE -->
+                <div id="delete" class="subsection">
+                    <h3 class="subsection-title">DELETE: Removendo dados específicos</h3>
+                    <p class="description">Deletando registros da tabela (mantém a estrutura).</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Deletando um registro específico</span>
+<span class="keyword">DELETE FROM</span> cursos
+<span class="keyword">WHERE</span> idcursos = <span class="string">'9'</span>;
+
+<span class="comment">-- Deletando múltiplos registros com LIMIT</span>
+<span class="keyword">DELETE FROM</span> cursos
+<span class="keyword">WHERE</span> ano = <span class="string">'2018'</span>
+<span class="keyword">LIMIT</span> <span class="number">2</span>;</code></pre>
+                    </div>
+                </div>
+
+                <!-- 2.6 TRUNCATE -->
+                <div id="truncate" class="subsection">
+                    <h3 class="subsection-title">TRUNCATE: Limpando todos os dados</h3>
+                    <p class="description">Apagando todos os registros mas mantendo a estrutura da tabela.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="keyword">TRUNCATE TABLE</span> cursos;</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PARTE 3: DQL - Consultas Avançadas -->
+            <section id="dql" class="section">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <div class="section-title">
+                        <h2>DQL - Consultas Avançadas com SELECT</h2>
+                        <p>Filtrando, ordenando e selecionando colunas específicas</p>
+                    </div>
+                    <span class="tag tag-dml">CONSULTAS</span>
+                </div>
+
+                <!-- 3.1 SELECT Específico -->
+                <div id="select-columns" class="subsection">
+                    <h3 class="subsection-title">SELECT: Selecionando colunas específicas</h3>
+                    <p class="description">Em vez de usar * (todas as colunas), podemos selecionar apenas as colunas que precisamos.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Selecionando apenas nome e nascimento</span>
+<span class="keyword">SELECT</span> nome, nascimento 
+<span class="keyword">FROM</span> gafanhotos;</code></pre>
+                    </div>
+                </div>
+
+                <!-- 3.2 WHERE -->
+                <div id="where" class="subsection">
+                    <h3 class="subsection-title">WHERE: Filtrando registros</h3>
+                    <p class="description">Usando WHERE para filtrar dados com base em condições específicas.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Filtrando por uma condição simples</span>
+<span class="keyword">SELECT</span> nome, nascimento 
+<span class="keyword">FROM</span> gafanhotos
+<span class="keyword">WHERE</span> nascimento > <span class="string">'2000-01-01'</span>;</code></pre>
+                    </div>
+                </div>
+
+                <!-- 3.3 BETWEEN -->
+                <div id="between" class="subsection">
+                    <h3 class="subsection-title">BETWEEN: Filtrando por intervalo</h3>
+                    <p class="description">BETWEEN permite filtrar valores dentro de um intervalo (inclusive os limites).</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Selecionando registros entre duas datas</span>
+<span class="keyword">SELECT</span> nome, nascimento 
+<span class="keyword">FROM</span> gafanhotos
+<span class="keyword">WHERE</span> nascimento <span class="keyword">BETWEEN</span> <span class="string">'2000-01-01'</span> <span class="keyword">AND</span> <span class="string">'2015-12-31'</span>;</code></pre>
+                    </div>
+                </div>
+
+                <!-- 3.4 ORDER BY -->
+                <div id="order-by" class="subsection">
+                    <h3 class="subsection-title">ORDER BY: Ordenando resultados</h3>
+                    <p class="description">Ordenando os resultados por uma ou mais colunas (ASC = crescente, DESC = decrescente).</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Ordenando por nascimento (crescente por padrão)</span>
+<span class="keyword">SELECT</span> nome, nascimento 
+<span class="keyword">FROM</span> gafanhotos
+<span class="keyword">ORDER BY</span> nascimento;
+
+<span class="comment">-- Ordenando de forma decrescente</span>
+<span class="keyword">SELECT</span> nome, nascimento 
+<span class="keyword">FROM</span> gafanhotos
+<span class="keyword">ORDER BY</span> nascimento <span class="keyword">DESC</span>;
+
+<span class="comment">-- Ordenando por múltiplas colunas</span>
+<span class="keyword">SELECT</span> nome, nascimento 
+<span class="keyword">FROM</span> gafanhotos
+<span class="keyword">ORDER BY</span> nascimento, nome;</code></pre>
+                    </div>
+                </div>
+
+                <!-- 3.5 Consulta Completa -->
+                <div id="query-complete" class="subsection">
+                    <h3 class="subsection-title">Consulta Completa: Combinando tudo</h3>
+                    <p class="description">Exemplo completo: selecionando colunas específicas, filtrando por intervalo e ordenando.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Lista com nome e nascimento de todos que nasceram entre 2000 e 2015</span>
+<span class="keyword">SELECT</span> nome, nascimento 
+<span class="keyword">FROM</span> gafanhotos
+<span class="keyword">WHERE</span> nascimento <span class="keyword">BETWEEN</span> <span class="string">'2000-01-01'</span> <span class="keyword">AND</span> <span class="string">'2015-12-31'</span>
+<span class="keyword">ORDER BY</span> nascimento;</code></pre>
+                    </div>
+                </div>
+
+                <!-- 3.6 LIMIT -->
+                <div id="limit" class="subsection">
+                    <h3 class="subsection-title">LIMIT: Limitando resultados</h3>
+                    <p class="description">Limitando a quantidade de registros retornados pela consulta.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Retornando apenas os 5 primeiros registros</span>
+<span class="keyword">SELECT</span> nome, nascimento 
+<span class="keyword">FROM</span> gafanhotos
+<span class="keyword">ORDER BY</span> nascimento
+<span class="keyword">LIMIT</span> <span class="number">5</span>;
+
+<span class="comment">-- Pulando os 3 primeiros e retornando os próximos 5 (paginação)</span>
+<span class="keyword">SELECT</span> nome, nascimento 
+<span class="keyword">FROM</span> gafanhotos
+<span class="keyword">ORDER BY</span> nascimento
+<span class="keyword">LIMIT</span> <span class="number">3</span>, <span class="number">5</span>;</code></pre>
+                    </div>
+                </div>
+
+                <!-- 3.7 LIKE -->
+                <div id="like" class="subsection">
+                    <h3 class="subsection-title">LIKE: Buscando padrões de texto</h3>
+                    <p class="description">Usando LIKE para buscar registros que correspondem a um padrão (% = qualquer sequência, _ = um caractere).</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Nomes que começam com 'A'</span>
+<span class="keyword">SELECT</span> nome 
+<span class="keyword">FROM</span> gafanhotos
+<span class="keyword">WHERE</span> nome <span class="keyword">LIKE</span> <span class="string">'A%'</span>;
+
+<span class="comment">-- Nomes que terminam com 'a'</span>
+<span class="keyword">SELECT</span> nome 
+<span class="keyword">FROM</span> gafanhotos
+<span class="keyword">WHERE</span> nome <span class="keyword">LIKE</span> <span class="string">'%a'</span>;
+
+<span class="comment">-- Nomes que contêm 'silva'</span>
+<span class="keyword">SELECT</span> nome 
+<span class="keyword">FROM</span> gafanhotos
+<span class="keyword">WHERE</span> nome <span class="keyword">LIKE</span> <span class="string">'%silva%'</span>;</code></pre>
+                    </div>
+                </div>
+
+                <!-- 3.8 IN -->
+                <div id="in" class="subsection">
+                    <h3 class="subsection-title">IN: Filtrando por lista de valores</h3>
+                    <p class="description">Usando IN para verificar se um valor está em uma lista específica.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Selecionando registros de anos específicos</span>
+<span class="keyword">SELECT</span> nome, nascimento 
+<span class="keyword">FROM</span> gafanhotos
+<span class="keyword">WHERE YEAR</span>(nascimento) <span class="keyword">IN</span> (<span class="number">2000</span>, <span class="number">2005</span>, <span class="number">2010</span>, <span class="number">2015</span>);</code></pre>
+                    </div>
+                </div>
+
+                <!-- 3.9 Exercícios Práticos -->
+                <div id="exercises" class="subsection">
+                    <h3 class="subsection-title">💡 Exercícios Práticos</h3>
+                    <p class="description">Exemplos práticos de consultas combinando múltiplos conceitos.</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL - Exercício 1</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Selecionar nome, sexo e profissão de programadores do sexo masculino</span>
+<span class="keyword">SELECT</span> nome, sexo, profissao 
+<span class="keyword">FROM</span> gafanhotos
+<span class="keyword">WHERE</span> profissao = <span class="string">'Programador'</span> <span class="keyword">AND</span> sexo = <span class="string">'M'</span>;</code></pre>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL - Exercício 2</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Listar mulheres nascidas no Brasil com nome começando com 'J'</span>
+<span class="keyword">SELECT</span> nome, nacionalidade 
+<span class="keyword">FROM</span> gafanhotos
+<span class="keyword">WHERE</span> nome <span class="keyword">LIKE</span> <span class="string">'J%'</span> 
+  <span class="keyword">AND</span> nacionalidade = <span class="string">'Brasil'</span>;</code></pre>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL - Exercício 3</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Buscar todos entre 2000 e 2015, ordenados por nascimento</span>
+<span class="keyword">SELECT</span> nome, nascimento 
+<span class="keyword">FROM</span> gafanhotos
+<span class="keyword">WHERE</span> nascimento <span class="keyword">BETWEEN</span> <span class="string">'2000-01-01'</span> <span class="keyword">AND</span> <span class="string">'2015-12-31'</span>
+<span class="keyword">ORDER BY</span> nascimento;</code></pre>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL - Exercício 4</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Combinar múltiplas condições com AND e OR</span>
+<span class="keyword">SELECT</span> nome, sexo, profissao, nacionalidade
+<span class="keyword">FROM</span> gafanhotos
+<span class="keyword">WHERE</span> (profissao = <span class="string">'Programador'</span> <span class="keyword">OR</span> profissao = <span class="string">'Desenvolvedor'</span>)
+  <span class="keyword">AND</span> nacionalidade = <span class="string">'Brasil'</span>
+<span class="keyword">ORDER BY</span> nome;</code></pre>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL - Exercício 5</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Filtrar por múltiplas condições: sexo, nacionalidade, peso e padrão de nome</span>
+<span class="keyword">SELECT</span> nome, nacionalidade, peso 
+<span class="keyword">FROM</span> gafanhotos
+<span class="keyword">WHERE</span> sexo = <span class="string">'M'</span> 
+  <span class="keyword">AND</span> nacionalidade != <span class="string">'Brasil'</span> 
+  <span class="keyword">AND</span> peso < <span class="number">100</span> 
+  <span class="keyword">AND</span> nome <span class="keyword">LIKE</span> <span class="string">'%Silva%'</span>;</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PARTE 4: Funções de Agregação e Subconsultas -->
+            <section id="aggregate" class="section">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <div class="section-title">
+                        <h2>Funções de Agregação e Subconsultas</h2>
+                        <p>Trabalhando com funções MAX, MIN, AVG, COUNT e subconsultas</p>
+                    </div>
+                    <span class="tag tag-dml">AVANÇADO</span>
+                </div>
+
+                <!-- 4.1 MAX -->
+                <div id="max" class="subsection">
+                    <h3 class="subsection-title">MAX(): Encontrando o maior valor</h3>
+                    <p class="description">A função MAX() retorna o maior valor de uma coluna.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Encontrando a maior altura</span>
+<span class="keyword">SELECT MAX</span>(altura) <span class="keyword">FROM</span> pessoas;
+
+<span class="comment">-- Encontrando o maior peso</span>
+<span class="keyword">SELECT MAX</span>(peso) <span class="keyword">FROM</span> pessoas;</code></pre>
+                    </div>
+                </div>
+
+                <!-- 4.2 MIN -->
+                <div id="min" class="subsection">
+                    <h3 class="subsection-title">MIN(): Encontrando o menor valor</h3>
+                    <p class="description">A função MIN() retorna o menor valor de uma coluna.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Encontrando a menor altura</span>
+<span class="keyword">SELECT MIN</span>(altura) <span class="keyword">FROM</span> pessoas;
+
+<span class="comment">-- Encontrando o menor peso</span>
+<span class="keyword">SELECT MIN</span>(peso) <span class="keyword">FROM</span> pessoas;</code></pre>
+                    </div>
+                </div>
+
+                <!-- 4.3 AVG -->
+                <div id="avg" class="subsection">
+                    <h3 class="subsection-title">AVG(): Calculando a média</h3>
+                    <p class="description">A função AVG() calcula a média dos valores de uma coluna.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Calculando a média de altura</span>
+<span class="keyword">SELECT AVG</span>(altura) <span class="keyword">FROM</span> pessoas;
+
+<span class="comment">-- Calculando a média de peso</span>
+<span class="keyword">SELECT AVG</span>(peso) <span class="keyword">FROM</span> pessoas;</code></pre>
+                    </div>
+                </div>
+
+                <!-- 4.4 COUNT -->
+                <div id="count" class="subsection">
+                    <h3 class="subsection-title">COUNT(): Contando registros</h3>
+                    <p class="description">A função COUNT() conta o número de registros.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Contando total de registros</span>
+<span class="keyword">SELECT COUNT</span>(*) <span class="keyword">FROM</span> pessoas;
+
+<span class="comment">-- Contando registros com condição</span>
+<span class="keyword">SELECT COUNT</span>(*) <span class="keyword">FROM</span> pessoas
+<span class="keyword">WHERE</span> sexo = <span class="string">'F'</span>;</code></pre>
+                    </div>
+                </div>
+
+                <!-- 4.5 Subconsultas -->
+                <div id="subquery" class="subsection">
+                    <h3 class="subsection-title">Subconsultas (Subqueries)</h3>
+                    <p class="description">Usando uma consulta dentro de outra para filtrar resultados baseados em valores calculados.</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL - Problema</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- ❌ INCORRETO: MAX() não identifica a linha inteira corretamente</span>
+<span class="keyword">SELECT</span> nome, altura
+<span class="keyword">FROM</span> pessoas
+<span class="keyword">WHERE</span> altura = <span class="keyword">MAX</span>(altura);</code></pre>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL - Solução com Subconsulta</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- ✅ CORRETO: Usando subconsulta para encontrar a pessoa mais alta</span>
+<span class="keyword">SELECT</span> nome, altura
+<span class="keyword">FROM</span> pessoas
+<span class="keyword">WHERE</span> altura = (<span class="keyword">SELECT MAX</span>(altura) <span class="keyword">FROM</span> pessoas);</code></pre>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL - Mais Exemplos</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Pessoa com menor peso</span>
+<span class="keyword">SELECT</span> nome, peso
+<span class="keyword">FROM</span> pessoas
+<span class="keyword">WHERE</span> peso = (<span class="keyword">SELECT MIN</span>(peso) <span class="keyword">FROM</span> pessoas);
+
+<span class="comment">-- Pessoas com altura acima da média</span>
+<span class="keyword">SELECT</span> nome, altura
+<span class="keyword">FROM</span> pessoas
+<span class="keyword">WHERE</span> altura > (<span class="keyword">SELECT AVG</span>(altura) <span class="keyword">FROM</span> pessoas);</code></pre>
+                    </div>
+                </div>
+
+                <!-- 4.6 Dicas Importantes -->
+                <div id="tips" class="subsection">
+                    <h3 class="subsection-title">💡 Dicas de Programador</h3>
+                    <p class="description">Boas práticas e observações importantes sobre consultas.</p>
+                    
+                    <div style="background: rgba(242, 145, 17, 0.1); border-left: 4px solid var(--secondary); padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                        <h4 style="color: var(--secondary); margin-bottom: 1rem; font-size: 1.1rem;">⚠️ Atenção com MAX() e MIN()</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">
+                            <strong>Problema:</strong> MAX() encontra o maior valor, mas não identifica corretamente a linha inteira sem subconsulta.
+                        </p>
+                        <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">
+                            <strong>Solução:</strong> Use subconsultas para garantir que você obtenha o registro completo correto.
+                        </p>
+                    </div>
+
+                    <div style="background: rgba(63, 185, 80, 0.1); border-left: 4px solid var(--success); padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                        <h4 style="color: var(--success); margin-bottom: 1rem; font-size: 1.1rem;">✅ Dica: ORDER BY DESC LIMIT 1</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">
+                            <strong>Alternativa:</strong> Para pegar a pessoa mais alta, você também pode usar:
+                        </p>
+                        <code style="display: block; background: var(--bg-code); padding: 1rem; border-radius: 6px; margin-top: 0.5rem;">
+                            <span class="keyword">SELECT</span> nome, altura <span class="keyword">FROM</span> pessoas <span class="keyword">ORDER BY</span> altura <span class="keyword">DESC LIMIT</span> <span class="number">1</span>;
+                        </code>
+                        <p style="color: var(--text-secondary); margin-top: 0.5rem;">
+                            Isso normalmente funciona para pegar a pessoa mais alta, mas subconsultas garantem todos os empates.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PARTE 5: GROUP BY e HAVING -->
+            <section id="groupby" class="section">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <div class="section-title">
+                        <h2>GROUP BY e HAVING - Agrupamento de Dados</h2>
+                        <p>Agrupando registros e filtrando grupos com condições</p>
+                    </div>
+                    <span class="tag tag-dml">AGRUPAMENTO</span>
+                </div>
+
+                <!-- 5.1 GROUP BY Básico -->
+                <div id="groupby-basic" class="subsection">
+                    <h3 class="subsection-title">GROUP BY: Agrupando dados</h3>
+                    <p class="description">GROUP BY agrupa registros que têm valores iguais em colunas específicas, permitindo usar funções de agregação por grupo.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Contando quantas pessoas existem por profissão</span>
+<span class="keyword">SELECT</span> profissao, <span class="keyword">COUNT</span>(*) 
+<span class="keyword">FROM</span> gafanhotos
+<span class="keyword">GROUP BY</span> profissao
+<span class="keyword">ORDER BY COUNT</span>(profissao);
+
+<span class="comment">-- Contando pessoas por sexo (nascidas após 2005)</span>
+<span class="keyword">SELECT</span> sexo, <span class="keyword">COUNT</span>(*) 
+<span class="keyword">FROM</span> gafanhotos
+<span class="keyword">WHERE</span> nascimento > <span class="string">'2005-01-01'</span>
+<span class="keyword">GROUP BY</span> sexo;</code></pre>
+                    </div>
+                </div>
+
+                <!-- 5.2 HAVING -->
+                <div id="having" class="subsection">
+                    <h3 class="subsection-title">HAVING: Filtrando grupos</h3>
+                    <p class="description">HAVING filtra grupos após o agrupamento (diferente de WHERE que filtra antes). Use HAVING para condições com funções de agregação.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Contando cursos por ano, apenas anos após 2013, ordenado por quantidade</span>
+<span class="keyword">SELECT</span> ano, <span class="keyword">COUNT</span>(*) 
+<span class="keyword">FROM</span> cursos
+<span class="keyword">WHERE</span> totaulas > <span class="number">30</span>
+<span class="keyword">GROUP BY</span> ano
+<span class="keyword">HAVING</span> ano > <span class="number">2013</span>
+<span class="keyword">ORDER BY COUNT</span>(*) <span class="keyword">DESC</span>;</code></pre>
+                    </div>
+                </div>
+
+                <!-- 5.3 ROUND -->
+                <div id="round" class="subsection">
+                    <h3 class="subsection-title">ROUND(): Arredondando valores</h3>
+                    <p class="description">ROUND() arredonda números decimais para um número específico de casas decimais.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Calculando a média de carga arredondada</span>
+<span class="keyword">SELECT ROUND</span>(<span class="keyword">AVG</span>(carga)) <span class="keyword">FROM</span> cursos;
+
+<span class="comment">-- Arredondando para 2 casas decimais</span>
+<span class="keyword">SELECT ROUND</span>(<span class="keyword">AVG</span>(carga), <span class="number">2</span>) <span class="keyword">FROM</span> cursos;</code></pre>
+                    </div>
+                </div>
+
+                <!-- 5.4 GROUP BY com HAVING e Subconsulta -->
+                <div id="groupby-advanced" class="subsection">
+                    <h3 class="subsection-title">GROUP BY + HAVING + Subconsulta</h3>
+                    <p class="description">Combinando agrupamento com subconsultas para filtros mais complexos.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Cursos agrupados por carga, apenas cargas acima da média</span>
+<span class="keyword">SELECT</span> carga, <span class="keyword">COUNT</span>(*) 
+<span class="keyword">FROM</span> cursos
+<span class="keyword">WHERE</span> ano > <span class="number">2015</span>
+<span class="keyword">GROUP BY</span> carga
+<span class="keyword">HAVING</span> carga > (<span class="keyword">SELECT ROUND</span>(<span class="keyword">AVG</span>(carga)) <span class="keyword">FROM</span> cursos);</code></pre>
+                    </div>
+                </div>
+
+                <!-- 5.5 Exercícios GROUP BY -->
+                <div id="groupby-exercises" class="subsection">
+                    <h3 class="subsection-title">💡 Exercícios com GROUP BY e HAVING</h3>
+                    <p class="description">Exemplos práticos de agrupamento e filtragem de grupos.</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL - Exercício 1</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Nacionalidades com mais de 3 pessoas (exceto Brasil)</span>
+<span class="keyword">SELECT</span> nome, nacionalidade, <span class="keyword">COUNT</span>(*) 
+<span class="keyword">FROM</span> gafanhotos
+<span class="keyword">WHERE</span> nacionalidade != <span class="string">'Brasil'</span>
+<span class="keyword">GROUP BY</span> nacionalidade
+<span class="keyword">HAVING COUNT</span>(*) > <span class="number">3</span>;</code></pre>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL - Exercício 2</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Alturas de pessoas com peso > 100, apenas alturas acima da média geral</span>
+<span class="keyword">SELECT</span> altura, <span class="keyword">COUNT</span>(*) 
+<span class="keyword">FROM</span> gafanhotos
+<span class="keyword">WHERE</span> peso > <span class="number">100</span>
+<span class="keyword">GROUP BY</span> altura
+<span class="keyword">HAVING</span> altura > (<span class="keyword">SELECT AVG</span>(altura) <span class="keyword">FROM</span> gafanhotos);</code></pre>
+                    </div>
+                </div>
+
+                <!-- 5.6 WHERE vs HAVING -->
+                <div id="where-vs-having" class="subsection">
+                    <h3 class="subsection-title">⚖️ WHERE vs HAVING: Qual usar?</h3>
+                    <p class="description">Entendendo a diferença entre WHERE e HAVING.</p>
+                    
+                    <div style="background: rgba(0, 117, 143, 0.1); border-left: 4px solid var(--primary); padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                        <h4 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem;">📋 Ordem de Execução SQL</h4>
+                        <ol style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 2;">
+                            <li><strong style="color: var(--text-primary);">FROM</strong> - Define a tabela</li>
+                            <li><strong style="color: var(--text-primary);">WHERE</strong> - Filtra registros individuais</li>
+                            <li><strong style="color: var(--text-primary);">GROUP BY</strong> - Agrupa os registros</li>
+                            <li><strong style="color: var(--text-primary);">HAVING</strong> - Filtra grupos</li>
+                            <li><strong style="color: var(--text-primary);">SELECT</strong> - Seleciona as colunas</li>
+                            <li><strong style="color: var(--text-primary);">ORDER BY</strong> - Ordena o resultado</li>
+                            <li><strong style="color: var(--text-primary);">LIMIT</strong> - Limita a quantidade</li>
+                        </ol>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                        <div style="background: rgba(63, 185, 80, 0.1); border: 1px solid var(--success); padding: 1.5rem; border-radius: 8px;">
+                            <h4 style="color: var(--success); margin-bottom: 0.75rem; font-size: 1rem;">WHERE</h4>
+                            <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 1.8; font-size: 0.9rem;">
+                                <li>Filtra <strong>antes</strong> do agrupamento</li>
+                                <li>Trabalha com registros individuais</li>
+                                <li>Não pode usar funções de agregação</li>
+                                <li>Exemplo: WHERE peso > 100</li>
+                            </ul>
+                        </div>
+                        <div style="background: rgba(242, 145, 17, 0.1); border: 1px solid var(--secondary); padding: 1.5rem; border-radius: 8px;">
+                            <h4 style="color: var(--secondary); margin-bottom: 0.75rem; font-size: 1rem;">HAVING</h4>
+                            <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 1.8; font-size: 0.9rem;">
+                                <li>Filtra <strong>depois</strong> do agrupamento</li>
+                                <li>Trabalha com grupos</li>
+                                <li>Pode usar funções de agregação</li>
+                                <li>Exemplo: HAVING COUNT(*) > 3</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary -->
+            <div class="summary-box">
+                <h3>📚 Resumo dos Comandos SQL</h3>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <h4>DDL - Estrutura</h4>
+                        <p>CREATE, ALTER, DROP, RENAME, MODIFY, CHANGE</p>
+                    </div>
+                    <div class="summary-item">
+                        <h4>DML - Dados</h4>
+                        <p>INSERT, SELECT, UPDATE, DELETE, TRUNCATE</p>
+                    </div>
+                    <div class="summary-item">
+                        <h4>DQL - Consultas</h4>
+                        <p>SELECT, WHERE, BETWEEN, ORDER BY, LIMIT, LIKE, IN</p>
+                    </div>
+                    <div class="summary-item">
+                        <h4>Funções de Agregação</h4>
+                        <p>MAX, MIN, AVG, COUNT, Subconsultas</p>
+                    </div>
+                    <div class="summary-item">
+                        <h4>Agrupamento</h4>
+                        <p>GROUP BY, HAVING, ROUND</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Documentação MySQL - Estudos baseados no curso do Gustavo Guanabara</p>
+        </div>
+    </footer>
+
+    <button class="scroll-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // Copy code functionality
+        function copyCode(button) {
+            const codeBlock = button.closest('.code-block').querySelector('code');
+            const text = codeBlock.innerText;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copiado!';
+                button.style.background = 'var(--success)';
+                button.style.borderColor = 'var(--success)';
+                button.style.color = 'white';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = 'transparent';
+                    button.style.borderColor = 'var(--border)';
+                    button.style.color = 'var(--text-secondary)';
+                }, 2000);
+            });
+        }
+
+        // Scroll to top functionality
+        const scrollTopBtn = document.querySelector('.scroll-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
