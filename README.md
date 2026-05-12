@@ -60,7 +60,7 @@ Google Fonts — Inter (interface) + Fira Code (código)
 🚀 Como Usar
 Nenhuma instalação necessária. Basta:
 # Clone ou baixe o repositório
-git clone https://github.com/seu-usuario/seu-repositorio.git
+git clone https://github.com/totalo-dev/totalo-dev/MySQL
 
 # Abra o arquivo no navegador
 open index.html
