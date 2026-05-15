@@ -29,6 +29,32 @@
             --danger: #F85149;
         }
 
+        /* Scrollbar customization */
+        ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--bg-card);
+            border-radius: 6px;
+            border: 2px solid var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2A2F3E;
+        }
+
+        /* Firefox scrollbar */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--bg-card) var(--bg-dark);
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, #0F1419 0%, #1A1F2E 100%);
@@ -369,6 +395,396 @@
                 padding: 1rem;
                 font-size: 0.85rem;
             }
+
+            .sidebar-index {
+                display: none !important;
+            }
+        }
+
+        /* Sidebar Index */
+        .sidebar-index {
+            position: fixed;
+            left: 2rem;
+            top: 120px;
+            width: 260px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .sidebar-index h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .sidebar-index-list {
+            list-style: none;
+        }
+
+        .sidebar-index-item {
+            margin-bottom: 0.75rem;
+        }
+
+        .sidebar-index-link {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            line-height: 1.4;
+            transition: all 0.3s ease;
+            padding: 0.5rem;
+            border-radius: 6px;
+        }
+
+        .sidebar-index-link:hover {
+            background: var(--bg-dark);
+            color: var(--secondary);
+        }
+
+        .sidebar-index-link.active {
+            background: rgba(242, 145, 17, 0.1);
+            color: var(--secondary);
+            border-left: 3px solid var(--secondary);
+        }
+
+        .sidebar-index-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 24px;
+            height: 24px;
+            background: var(--bg-dark);
+            border-radius: 50%;
+            font-weight: 600;
+            font-size: 0.75rem;
+            color: var(--primary);
+        }
+
+        .sidebar-index-text {
+            flex: 1;
+        }
+
+        /* When/How to use boxes */
+        .usage-boxes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .usage-box {
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid;
+        }
+
+        .usage-box.when {
+            background: rgba(63, 185, 80, 0.1);
+            border-color: var(--success);
+        }
+
+        .usage-box.how {
+            background: rgba(0, 117, 143, 0.1);
+            border-color: var(--primary);
+        }
+
+        .usage-box h4 {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .usage-box.when h4 {
+            color: var(--success);
+        }
+
+        .usage-box.how h4 {
+            color: var(--primary);
+        }
+
+        .usage-box p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .usage-boxes {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Quiz Styles */
+        .quiz-question {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-dark);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--primary);
+            background: rgba(0, 117, 143, 0.1);
+        }
+
+        .quiz-option input[type="radio"] {
+            margin-top: 0.25rem;
+            cursor: pointer;
+        }
+
+        .quiz-option-text {
+            flex: 1;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .quiz-option-text code {
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .quiz-option.correct {
+            border-color: var(--success);
+            background: rgba(63, 185, 80, 0.1);
+        }
+
+        .quiz-option.incorrect {
+            border-color: var(--danger);
+            background: rgba(248, 81, 73, 0.1);
+        }
+
+        .quiz-submit {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .quiz-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 117, 143, 0.4);
+        }
+
+        .quiz-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .quiz-feedback {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .quiz-feedback.show {
+            display: block;
+        }
+
+        .quiz-feedback.correct {
+            background: rgba(63, 185, 80, 0.1);
+            border: 2px solid var(--success);
+            color: var(--success);
+        }
+
+        .quiz-feedback.incorrect {
+            background: rgba(248, 81, 73, 0.1);
+            border: 2px solid var(--danger);
+            color: var(--danger);
+        }
+
+        .quiz-feedback strong {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-reset {
+            background: linear-gradient(135deg, var(--secondary), #D29922);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            display: block;
+            margin: 2rem auto 0;
+        }
+
+        .quiz-reset:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(242, 145, 17, 0.4);
+        }
+
+        /* Challenge Styles */
+        .challenge-task {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .code-editor {
+            width: 100%;
+            min-height: 150px;
+            background: var(--bg-code);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            color: var(--text-primary);
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            resize: vertical;
+            margin-bottom: 1rem;
+        }
+
+        .code-editor:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 117, 143, 0.1);
+        }
+
+        .code-editor::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.5;
+        }
+
+        .challenge-run {
+            background: linear-gradient(135deg, var(--success), #2D8B3E);
+            color: white;
+            border: none;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .challenge-run:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(63, 185, 80, 0.4);
+        }
+
+        .challenge-run:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .challenge-result {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .challenge-result.show {
+            display: block;
+        }
+
+        .challenge-result.success {
+            background: rgba(63, 185, 80, 0.1);
+            border: 2px solid var(--success);
+        }
+
+        .challenge-result.error {
+            background: rgba(248, 81, 73, 0.1);
+            border: 2px solid var(--danger);
+        }
+
+        .challenge-result h4 {
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .challenge-result.success h4 {
+            color: var(--success);
+        }
+
+        .challenge-result.error h4 {
+            color: var(--danger);
+        }
+
+        .challenge-result p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 0.5rem 0;
+        }
+
+        .challenge-result code {
+            background: var(--bg-code);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        /* Adjust container for sidebar */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                margin-left: 320px;
+                margin-right: auto;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1199px) {
+            .sidebar-index {
+                display: none !important;
+            }
         }
 
         /* Scroll to top button */
@@ -408,7 +824,7 @@
                     <div class="logo-icon">SQL</div>
                     <div>
                         <h1>Documentação MySQL</h1>
-                        <p class="subtitle">Estudos baseados no curso do Gustavo Guanabara</p>
+                        <p class="subtitle">Estudos Felix Banco de Dados</p>
                     </div>
                 </div>
             </div>
@@ -452,8 +868,70 @@
                 <a href="#having">HAVING</a>
                 <a href="#round">ROUND()</a>
                 <a href="#where-vs-having">WHERE vs HAVING</a>
+                <a href="#joins">Relacionamentos</a>
+                <a href="#foreign-key">Foreign Key</a>
+                <a href="#inner-join">INNER JOIN</a>
+                <a href="#alias">Alias</a>
+                <a href="#join-types">Tipos de JOIN</a>
+                <a href="#quiz">🎯 Quiz Prático</a>
+                <a href="#challenge">💻 Desafio de Código</a>
             </div>
         </nav>
+
+        <!-- Sidebar Index -->
+        <aside class="sidebar-index">
+            <h3>📖 Guia de Estudos</h3>
+            <ul class="sidebar-index-list">
+                <li class="sidebar-index-item">
+                    <a href="#ddl" class="sidebar-index-link">
+                        <span class="sidebar-index-number">1</span>
+                        <span class="sidebar-index-text">Criar e modificar estrutura de tabelas</span>
+                    </a>
+                </li>
+                <li class="sidebar-index-item">
+                    <a href="#dml" class="sidebar-index-link">
+                        <span class="sidebar-index-number">2</span>
+                        <span class="sidebar-index-text">Inserir, atualizar e deletar dados</span>
+                    </a>
+                </li>
+                <li class="sidebar-index-item">
+                    <a href="#dql" class="sidebar-index-link">
+                        <span class="sidebar-index-number">3</span>
+                        <span class="sidebar-index-text">Consultar e filtrar informações</span>
+                    </a>
+                </li>
+                <li class="sidebar-index-item">
+                    <a href="#aggregate" class="sidebar-index-link">
+                        <span class="sidebar-index-number">4</span>
+                        <span class="sidebar-index-text">Calcular médias, máximos e mínimos</span>
+                    </a>
+                </li>
+                <li class="sidebar-index-item">
+                    <a href="#groupby" class="sidebar-index-link">
+                        <span class="sidebar-index-number">5</span>
+                        <span class="sidebar-index-text">Agrupar dados e contar registros</span>
+                    </a>
+                </li>
+                <li class="sidebar-index-item">
+                    <a href="#joins" class="sidebar-index-link">
+                        <span class="sidebar-index-number">6</span>
+                        <span class="sidebar-index-text">Relacionar e combinar tabelas</span>
+                    </a>
+                </li>
+                <li class="sidebar-index-item" style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+                    <a href="#quiz" class="sidebar-index-link">
+                        <span class="sidebar-index-number" style="background: linear-gradient(135deg, var(--secondary), #D29922);">🎯</span>
+                        <span class="sidebar-index-text">Quiz - Teste seus conhecimentos</span>
+                    </a>
+                </li>
+                <li class="sidebar-index-item">
+                    <a href="#challenge" class="sidebar-index-link">
+                        <span class="sidebar-index-number" style="background: linear-gradient(135deg, var(--success), #2D8B3E);">💻</span>
+                        <span class="sidebar-index-text">Desafio - Pratique codificando</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
 
         <main></main>
 
@@ -472,6 +950,22 @@
                 <div id="create" class="subsection">
                     <h3 class="subsection-title">CREATE TABLE: Criando tabelas</h3>
                     <p class="description">Primeiro passo: criar a estrutura da tabela com colunas, tipos de dados e constraints.</p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                        <div style="background: rgba(63, 185, 80, 0.1); border: 1px solid var(--success); padding: 1rem; border-radius: 8px;">
+                            <h4 style="color: var(--success); margin-bottom: 0.5rem; font-size: 0.9rem;">✅ Quando usar</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; line-height: 1.6;">
+                                Use quando precisar criar uma nova tabela no banco de dados pela primeira vez.
+                            </p>
+                        </div>
+                        <div style="background: rgba(0, 117, 143, 0.1); border: 1px solid var(--primary); padding: 1rem; border-radius: 8px;">
+                            <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 0.9rem;">📖 Como usar</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; line-height: 1.6;">
+                                Defina o nome da tabela, as colunas com seus tipos de dados e a chave primária.
+                            </p>
+                        </div>
+                    </div>
+
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">SQL</span>
@@ -494,6 +988,22 @@
                 <div id="alter" class="subsection">
                     <h3 class="subsection-title">ALTER TABLE: Modificando estrutura</h3>
                     <p class="description">Após criar a tabela, podemos adicionar, remover ou modificar colunas.</p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                        <div style="background: rgba(63, 185, 80, 0.1); border: 1px solid var(--success); padding: 1rem; border-radius: 8px;">
+                            <h4 style="color: var(--success); margin-bottom: 0.5rem; font-size: 0.9rem;">✅ Quando usar</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; line-height: 1.6;">
+                                Use quando precisar adicionar, remover ou reposicionar colunas em uma tabela existente.
+                            </p>
+                        </div>
+                        <div style="background: rgba(0, 117, 143, 0.1); border: 1px solid var(--primary); padding: 1rem; border-radius: 8px;">
+                            <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 0.9rem;">📖 Como usar</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; line-height: 1.6;">
+                                Use ADD COLUMN para adicionar, DROP COLUMN para remover, AFTER/FIRST para posicionar.
+                            </p>
+                        </div>
+                    </div>
+
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">SQL</span>
@@ -633,6 +1143,18 @@
                 <div id="insert" class="subsection">
                     <h3 class="subsection-title">INSERT INTO: Inserindo dados</h3>
                     <p class="description">Adicionando registros na tabela usando DEFAULT para valores automáticos.</p>
+                    
+                    <div class="usage-boxes">
+                        <div class="usage-box when">
+                            <h4>✅ Quando usar</h4>
+                            <p>Use quando precisar adicionar novos registros (linhas) na tabela.</p>
+                        </div>
+                        <div class="usage-box how">
+                            <h4>📖 Como usar</h4>
+                            <p>Especifique os valores na ordem das colunas. Use DEFAULT para valores automáticos.</p>
+                        </div>
+                    </div>
+
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">SQL</span>
@@ -683,6 +1205,18 @@
                 <div id="update" class="subsection">
                     <h3 class="subsection-title">UPDATE: Modificando dados existentes</h3>
                     <p class="description">Alterando valores de registros já inseridos na tabela.</p>
+                    
+                    <div class="usage-boxes">
+                        <div class="usage-box when">
+                            <h4>✅ Quando usar</h4>
+                            <p>Use quando precisar alterar dados de registros que já existem na tabela.</p>
+                        </div>
+                        <div class="usage-box how">
+                            <h4>📖 Como usar</h4>
+                            <p>Use SET para definir novos valores e WHERE para especificar quais registros alterar.</p>
+                        </div>
+                    </div>
+
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">SQL</span>
@@ -1144,6 +1678,18 @@
                 <div id="groupby-basic" class="subsection">
                     <h3 class="subsection-title">GROUP BY: Agrupando dados</h3>
                     <p class="description">GROUP BY agrupa registros que têm valores iguais em colunas específicas, permitindo usar funções de agregação por grupo.</p>
+                    
+                    <div class="usage-boxes">
+                        <div class="usage-box when">
+                            <h4>✅ Quando usar</h4>
+                            <p>Use quando quiser contar, somar ou calcular médias por categoria (ex: contar pessoas por profissão).</p>
+                        </div>
+                        <div class="usage-box how">
+                            <h4>📖 Como usar</h4>
+                            <p>Combine com funções como COUNT(), SUM(), AVG(). Agrupe pela coluna que define as categorias.</p>
+                        </div>
+                    </div>
+
                     <div class="code-block">
                         <div class="code-header">
                             <span class="code-lang">SQL</span>
@@ -1172,7 +1718,7 @@
                             <span class="code-lang">SQL</span>
                             <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
                         </div>
-                        <pre><code><span class="comment">-- Contando cursos por ano, apenas anos após 2013, ordenado por quantidade</span>
+                        <pre><code><span class="comment">-- Contando cursos por ano, apenas anos após 2013, ordenado por quantidade decrescente</span>
 <span class="keyword">SELECT</span> ano, <span class="keyword">COUNT</span>(*) 
 <span class="keyword">FROM</span> cursos
 <span class="keyword">WHERE</span> totaulas > <span class="number">30</span>
@@ -1290,6 +1836,421 @@
                 </div>
             </section>
 
+            <!-- PARTE 6: Relacionamentos e JOINs -->
+            <section id="joins" class="section">
+                <div class="section-header">
+                    <div class="section-number">6</div>
+                    <div class="section-title">
+                        <h2>Relacionamentos e JOINs</h2>
+                        <p>Conectando tabelas através de chaves estrangeiras e consultas relacionadas</p>
+                    </div>
+                    <span class="tag tag-ddl">RELACIONAMENTOS</span>
+                </div>
+
+                <!-- 6.1 Foreign Key -->
+                <div id="foreign-key" class="subsection">
+                    <h3 class="subsection-title">FOREIGN KEY: Criando relacionamentos</h3>
+                    <p class="description">Chaves estrangeiras (Foreign Keys) criam relacionamentos entre tabelas, garantindo integridade referencial.</p>
+                    
+                    <div class="usage-boxes">
+                        <div class="usage-box when">
+                            <h4>✅ Quando usar</h4>
+                            <p>Use quando uma tabela precisa referenciar dados de outra tabela (ex: aluno referenciando um curso).</p>
+                        </div>
+                        <div class="usage-box how">
+                            <h4>📖 Como usar</h4>
+                            <p>Adicione uma coluna e crie a foreign key referenciando a chave primária da outra tabela.</p>
+                        </div>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL - Passo 1: Adicionar coluna</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Adicionando uma coluna para armazenar o curso preferido</span>
+<span class="keyword">ALTER TABLE</span> gafanhotos 
+<span class="keyword">ADD</span> cursopreferido <span class="keyword">INT</span>;
+
+<span class="comment">-- Verificando a estrutura da tabela</span>
+<span class="keyword">DESC</span> gafanhotos;</code></pre>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL - Passo 2: Criar Foreign Key</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Criando a chave estrangeira que referencia a tabela cursos</span>
+<span class="keyword">ALTER TABLE</span> gafanhotos
+<span class="keyword">ADD FOREIGN KEY</span> (cursopreferido)
+<span class="keyword">REFERENCES</span> cursos(idcurso);</code></pre>
+                    </div>
+
+                    <div style="background: rgba(0, 117, 143, 0.1); border-left: 4px solid var(--primary); padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                        <h4 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem;">🔗 O que é Foreign Key?</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">
+                            Uma Foreign Key (chave estrangeira) é uma coluna que faz referência à chave primária de outra tabela.
+                        </p>
+                        <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">
+                            <strong>Benefícios:</strong>
+                        </p>
+                        <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 1.8;">
+                            <li>Garante integridade referencial (não permite valores inválidos)</li>
+                            <li>Impede exclusão de registros que estão sendo referenciados</li>
+                            <li>Documenta o relacionamento entre tabelas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 6.2 Populando dados relacionados -->
+                <div id="populating-fk" class="subsection">
+                    <h3 class="subsection-title">Populando dados relacionados</h3>
+                    <p class="description">Após criar o relacionamento, podemos atualizar os registros com valores válidos da tabela referenciada.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Consultando cursos disponíveis</span>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> cursos;
+
+<span class="comment">-- Consultando gafanhotos</span>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> gafanhotos;
+
+<span class="comment">-- Atualizando o curso preferido do gafanhoto com id 1</span>
+<span class="keyword">UPDATE</span> gafanhotos 
+<span class="keyword">SET</span> cursopreferido = <span class="string">'6'</span> 
+<span class="keyword">WHERE</span> id = <span class="string">'1'</span>;</code></pre>
+                    </div>
+                </div>
+
+                <!-- 6.3 Integridade Referencial -->
+                <div id="referential-integrity" class="subsection">
+                    <h3 class="subsection-title">🛡️ Integridade Referencial</h3>
+                    <p class="description">Foreign Keys impedem a exclusão de registros que estão sendo referenciados por outras tabelas.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- ❌ Tentando deletar um curso que está sendo referenciado</span>
+<span class="comment">-- Isso vai FALHAR se algum gafanhoto tiver este curso como preferido</span>
+<span class="keyword">DELETE FROM</span> cursos 
+<span class="keyword">WHERE</span> idcurso = <span class="string">'28'</span>;</code></pre>
+                    </div>
+
+                    <div style="background: rgba(248, 81, 73, 0.1); border-left: 4px solid var(--danger); padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                        <h4 style="color: var(--danger); margin-bottom: 1rem; font-size: 1.1rem;">⚠️ Erro de Integridade</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">
+                            Se você tentar deletar um curso que está sendo usado como "cursopreferido" por algum gafanhoto, o MySQL retornará um erro:
+                        </p>
+                        <code style="display: block; background: var(--bg-code); padding: 1rem; border-radius: 6px; margin-top: 0.5rem; color: var(--danger);">
+                            ERROR 1451: Cannot delete or update a parent row: a foreign key constraint fails
+                        </code>
+                        <p style="color: var(--text-secondary); margin-top: 0.5rem;">
+                            Isso é bom! Protege seus dados de inconsistências.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 6.4 INNER JOIN -->
+                <div id="inner-join" class="subsection">
+                    <h3 class="subsection-title">INNER JOIN: Combinando tabelas</h3>
+                    <p class="description">JOIN permite combinar dados de múltiplas tabelas baseado em uma condição de relacionamento.</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL - Consultas Separadas (Problema)</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Consultando apenas nomes e IDs dos cursos preferidos</span>
+<span class="comment">-- Problema: só vemos números, não sabemos qual é o curso!</span>
+<span class="keyword">SELECT</span> nome, cursopreferido 
+<span class="keyword">FROM</span> gafanhotos;
+
+<span class="comment">-- Resultado: João | 6 (o que é o curso 6?)</span></code></pre>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL - Usando INNER JOIN (Solução)</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Combinando as duas tabelas para mostrar nomes legíveis</span>
+<span class="keyword">SELECT</span> gafanhotos.nome, cursos.nome
+<span class="keyword">FROM</span> gafanhotos <span class="keyword">JOIN</span> cursos
+<span class="keyword">ON</span> cursos.idcurso = gafanhotos.cursopreferido
+<span class="keyword">ORDER BY</span> gafanhotos.nome;
+
+<span class="comment">-- Resultado: João | MySQL (muito melhor!)</span></code></pre>
+                    </div>
+
+                    <div style="background: rgba(63, 185, 80, 0.1); border-left: 4px solid var(--success); padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                        <h4 style="color: var(--success); margin-bottom: 1rem; font-size: 1.1rem;">💡 Como o INNER JOIN funciona</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                            <strong>Passo a passo:</strong>
+                        </p>
+                        <ol style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 2;">
+                            <li>O MySQL pega cada registro da tabela <strong>gafanhotos</strong></li>
+                            <li>Para cada gafanhoto, busca na tabela <strong>cursos</strong> onde <code>idcurso = cursopreferido</code></li>
+                            <li>Se encontrar correspondência, combina as informações das duas tabelas</li>
+                            <li>Se NÃO encontrar correspondência, o registro é ignorado</li>
+                        </ol>
+                        <p style="color: var(--text-secondary); margin-top: 1rem;">
+                            <strong>Importante:</strong> INNER JOIN só retorna registros que existem em AMBAS as tabelas.
+                        </p>
+                    </div>
+
+                    <div style="background: rgba(0, 117, 143, 0.1); border-left: 4px solid var(--primary); padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                        <h4 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem;">📋 Sintaxe do JOIN</h4>
+                        <code style="display: block; background: var(--bg-code); padding: 1rem; border-radius: 6px; margin: 0.5rem 0; line-height: 1.8;">
+                            <span class="keyword">SELECT</span> tabela1.coluna, tabela2.coluna<br>
+                            <span class="keyword">FROM</span> tabela1 <span class="keyword">JOIN</span> tabela2<br>
+                            <span class="keyword">ON</span> tabela1.chave_estrangeira = tabela2.chave_primaria
+                        </code>
+                        <p style="color: var(--text-secondary); margin-top: 1rem;">
+                            <strong>Nota:</strong> Precisamos especificar <code>tabela.coluna</code> quando as duas tabelas têm colunas com o mesmo nome (como "nome" neste caso).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 6.5 Usando Alias -->
+                <div id="alias" class="subsection">
+                    <h3 class="subsection-title">Alias: Simplificando consultas</h3>
+                    <p class="description">Alias (apelidos) tornam as consultas mais legíveis e menos verbosas, especialmente com JOINs.</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL - Sem Alias (Verboso)</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Escrevendo o nome completo das tabelas toda vez</span>
+<span class="keyword">SELECT</span> gafanhotos.nome, cursos.nome, cursos.ano
+<span class="keyword">FROM</span> gafanhotos <span class="keyword">JOIN</span> cursos
+<span class="keyword">ON</span> cursos.idcurso = gafanhotos.cursopreferido
+<span class="keyword">ORDER BY</span> gafanhotos.nome;</code></pre>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL - Com Alias (Simplificado)</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- Usando alias "g" para gafanhotos e "c" para cursos</span>
+<span class="keyword">SELECT</span> g.nome <span class="keyword">AS</span> gafanhoto, c.nome <span class="keyword">AS</span> curso, c.ano
+<span class="keyword">FROM</span> gafanhotos <span class="keyword">AS</span> g <span class="keyword">JOIN</span> cursos <span class="keyword">AS</span> c
+<span class="keyword">ON</span> c.idcurso = g.cursopreferido
+<span class="keyword">ORDER BY</span> g.nome;
+
+<span class="comment">-- Versão ainda mais curta (AS é opcional)</span>
+<span class="keyword">SELECT</span> g.nome gafanhoto, c.nome curso, c.ano
+<span class="keyword">FROM</span> gafanhotos g <span class="keyword">JOIN</span> cursos c
+<span class="keyword">ON</span> c.idcurso = g.cursopreferido
+<span class="keyword">ORDER BY</span> g.nome;</code></pre>
+                    </div>
+
+                    <div style="background: rgba(242, 145, 17, 0.1); border-left: 4px solid var(--secondary); padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                        <h4 style="color: var(--secondary); margin-bottom: 1rem; font-size: 1.1rem;">💡 Vantagens do Alias</h4>
+                        <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 2;">
+                            <li><strong>Menos digitação:</strong> "g.nome" em vez de "gafanhotos.nome"</li>
+                            <li><strong>Mais legível:</strong> Código mais limpo e fácil de entender</li>
+                            <li><strong>Renomeia colunas:</strong> "nome AS gafanhoto" muda o nome da coluna no resultado</li>
+                            <li><strong>Obrigatório em alguns casos:</strong> Quando você faz JOIN da mesma tabela consigo mesma</li>
+                        </ul>
+                        <p style="color: var(--text-secondary); margin-top: 1rem;">
+                            <strong>Dica:</strong> Use alias curtos e significativos (g, c, p) para tabelas e nomes descritivos para colunas.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 6.6 Tipos de JOIN -->
+                <div id="join-types" class="subsection">
+                    <h3 class="subsection-title">📊 Tipos de JOIN</h3>
+                    <p class="description">Existem diferentes tipos de JOIN para diferentes necessidades.</p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                        <div style="background: rgba(0, 117, 143, 0.1); border: 1px solid var(--primary); padding: 1.5rem; border-radius: 8px;">
+                            <h4 style="color: var(--primary); margin-bottom: 0.75rem; font-size: 1rem;">INNER JOIN</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+                                Retorna apenas registros que têm correspondência em <strong>ambas</strong> as tabelas.
+                            </p>
+                        </div>
+                        <div style="background: rgba(242, 145, 17, 0.1); border: 1px solid var(--secondary); padding: 1.5rem; border-radius: 8px;">
+                            <h4 style="color: var(--secondary); margin-bottom: 0.75rem; font-size: 1rem;">LEFT JOIN</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+                                Retorna <strong>todos</strong> os registros da tabela esquerda, mesmo sem correspondência na direita.
+                            </p>
+                        </div>
+                        <div style="background: rgba(63, 185, 80, 0.1); border: 1px solid var(--success); padding: 1.5rem; border-radius: 8px;">
+                            <h4 style="color: var(--success); margin-bottom: 0.75rem; font-size: 1rem;">RIGHT JOIN</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+                                Retorna <strong>todos</strong> os registros da tabela direita, mesmo sem correspondência na esquerda.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL - INNER JOIN</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- INNER JOIN: apenas gafanhotos que têm curso preferido cadastrado</span>
+<span class="keyword">SELECT</span> gafanhotos.nome, cursos.nome
+<span class="keyword">FROM</span> gafanhotos <span class="keyword">JOIN</span> cursos
+<span class="keyword">ON</span> cursos.idcurso = gafanhotos.cursopreferido
+<span class="keyword">ORDER BY</span> gafanhotos.nome;</code></pre>
+                    </div>
+
+                    <div style="background: rgba(0, 117, 143, 0.1); border-left: 4px solid var(--primary); padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                        <h4 style="color: var(--primary); margin-bottom: 0.75rem; font-size: 1rem;">📌 INNER JOIN - O que retorna?</h4>
+                        <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0.75rem;">
+                            <strong>Mostra:</strong> Apenas gafanhotos que escolheram um curso preferido E esse curso existe na tabela cursos.
+                        </p>
+                        <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0.75rem;">
+                            <strong>Não mostra:</strong>
+                        </p>
+                        <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 1.8;">
+                            <li>Gafanhotos sem curso preferido (cursopreferido = NULL)</li>
+                            <li>Cursos que ninguém escolheu como preferido</li>
+                        </ul>
+                        <p style="color: var(--text-secondary); margin-top: 0.75rem;">
+                            <strong>Use quando:</strong> Você quer apenas dados completos, sem valores NULL.
+                        </p>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL - LEFT OUTER JOIN</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- LEFT OUTER JOIN: todos os gafanhotos, mesmo sem curso preferido</span>
+<span class="keyword">SELECT</span> gafanhotos.nome, cursos.nome
+<span class="keyword">FROM</span> gafanhotos <span class="keyword">LEFT OUTER JOIN</span> cursos
+<span class="keyword">ON</span> cursos.idcurso = gafanhotos.cursopreferido
+<span class="keyword">ORDER BY</span> gafanhotos.nome;</code></pre>
+                    </div>
+
+                    <div style="background: rgba(242, 145, 17, 0.1); border-left: 4px solid var(--secondary); padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                        <h4 style="color: var(--secondary); margin-bottom: 0.75rem; font-size: 1rem;">📌 LEFT OUTER JOIN - O que retorna?</h4>
+                        <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0.75rem;">
+                            <strong>Mostra:</strong> TODOS os gafanhotos, independente de terem curso preferido ou não.
+                        </p>
+                        <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0.75rem;">
+                            <strong>Comportamento:</strong>
+                        </p>
+                        <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 1.8;">
+                            <li>Gafanhotos com curso: mostra o nome do curso normalmente</li>
+                            <li>Gafanhotos sem curso: mostra NULL na coluna do curso</li>
+                        </ul>
+                        <p style="color: var(--text-secondary); margin-top: 0.75rem;">
+                            <strong>Use quando:</strong> A tabela da esquerda (gafanhotos) é a principal e você quer ver todos os seus registros.
+                        </p>
+                        <p style="color: var(--text-secondary); margin-top: 0.5rem; font-style: italic;">
+                            <strong>Exemplo prático:</strong> "Quero ver todos os alunos, incluindo os que ainda não escolheram um curso."
+                        </p>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SQL - RIGHT OUTER JOIN</span>
+                            <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+                        </div>
+                        <pre><code><span class="comment">-- RIGHT OUTER JOIN: todos os cursos, mesmo sem gafanhotos preferindo</span>
+<span class="keyword">SELECT</span> gafanhotos.nome, cursos.nome
+<span class="keyword">FROM</span> gafanhotos <span class="keyword">RIGHT OUTER JOIN</span> cursos
+<span class="keyword">ON</span> cursos.idcurso = gafanhotos.cursopreferido
+<span class="keyword">ORDER BY</span> gafanhotos.nome;</code></pre>
+                    </div>
+
+                    <div style="background: rgba(63, 185, 80, 0.1); border-left: 4px solid var(--success); padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                        <h4 style="color: var(--success); margin-bottom: 0.75rem; font-size: 1rem;">📌 RIGHT OUTER JOIN - O que retorna?</h4>
+                        <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0.75rem;">
+                            <strong>Mostra:</strong> TODOS os cursos, independente de terem sido escolhidos ou não.
+                        </p>
+                        <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 0.75rem;">
+                            <strong>Comportamento:</strong>
+                        </p>
+                        <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 1.8;">
+                            <li>Cursos escolhidos: mostra o nome do gafanhoto que escolheu</li>
+                            <li>Cursos não escolhidos: mostra NULL na coluna do gafanhoto</li>
+                        </ul>
+                        <p style="color: var(--text-secondary); margin-top: 0.75rem;">
+                            <strong>Use quando:</strong> A tabela da direita (cursos) é a principal e você quer ver todos os seus registros.
+                        </p>
+                        <p style="color: var(--text-secondary); margin-top: 0.5rem; font-style: italic;">
+                            <strong>Exemplo prático:</strong> "Quero ver todos os cursos disponíveis, incluindo os que ninguém se interessou."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 6.7 Comparação Visual dos JOINs -->
+                <div id="join-comparison" class="subsection">
+                    <h3 class="subsection-title">🔍 Comparação: Qual JOIN usar?</h3>
+                    <p class="description">Entenda quando usar cada tipo de JOIN com exemplos práticos.</p>
+                    
+                    <div style="background: rgba(0, 117, 143, 0.1); border: 1px solid var(--primary); padding: 2rem; border-radius: 12px; margin: 1.5rem 0;">
+                        <h4 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.2rem; text-align: center;">📊 Cenário de Exemplo</h4>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                            <div>
+                                <h5 style="color: var(--text-primary); margin-bottom: 1rem;">Tabela: gafanhotos</h5>
+                                <ul style="color: var(--text-secondary); line-height: 2;">
+                                    <li>Ana (curso: MySQL)</li>
+                                    <li>Bruno (curso: Java)</li>
+                                    <li>Carlos (curso: NULL)</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 style="color: var(--text-primary); margin-bottom: 1rem;">Tabela: cursos</h5>
+                                <ul style="color: var(--text-secondary); line-height: 2;">
+                                    <li>MySQL</li>
+                                    <li>Java</li>
+                                    <li>Python</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div style="border-top: 1px solid var(--border); padding-top: 1.5rem;">
+                            <h5 style="color: var(--text-primary); margin-bottom: 1rem;">Resultados de cada JOIN:</h5>
+                            
+                            <div style="margin-bottom: 1rem;">
+                                <strong style="color: var(--primary);">INNER JOIN:</strong>
+                                <span style="color: var(--text-secondary);"> Ana-MySQL, Bruno-Java</span>
+                                <br>
+                                <small style="color: var(--text-secondary);">(Carlos não aparece pois não tem curso, Python não aparece pois ninguém escolheu)</small>
+                            </div>
+
+                            <div style="margin-bottom: 1rem;">
+                                <strong style="color: var(--secondary);">LEFT JOIN:</strong>
+                                <span style="color: var(--text-secondary);"> Ana-MySQL, Bruno-Java, Carlos-NULL</span>
+                                <br>
+                                <small style="color: var(--text-secondary);">(Todos os gafanhotos aparecem, Carlos com NULL no curso)</small>
+                            </div>
+
+                            <div>
+                                <strong style="color: var(--success);">RIGHT JOIN:</strong>
+                                <span style="color: var(--text-secondary);"> Ana-MySQL, Bruno-Java, NULL-Python</span>
+                                <br>
+                                <small style="color: var(--text-secondary);">(Todos os cursos aparecem, Python com NULL no gafanhoto)</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(242, 145, 17, 0.1); border-left: 4px solid var(--secondary); padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                        <h4 style="color: var(--secondary); margin-bottom: 1rem; font-size: 1.1rem;">💡 Dica Prática</h4>
+                        <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 2;">
+                            <li><strong>Use INNER JOIN</strong> quando quiser apenas dados completos (sem NULLs)</li>
+                            <li><strong>Use LEFT JOIN</strong> quando a tabela da esquerda é a principal e você quer todos os seus registros</li>
+                            <li><strong>Use RIGHT JOIN</strong> quando a tabela da direita é a principal e você quer todos os seus registros</li>
+                        </ul>
+                        <p style="color: var(--text-secondary); margin-top: 1rem; font-style: italic;">
+                            Nota: OUTER é opcional. "LEFT JOIN" e "LEFT OUTER JOIN" são equivalentes.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
             <!-- Summary -->
             <div class="summary-box">
                 <h3>📚 Resumo dos Comandos SQL</h3>
@@ -1314,8 +2275,588 @@
                         <h4>Agrupamento</h4>
                         <p>GROUP BY, HAVING, ROUND</p>
                     </div>
+                    <div class="summary-item">
+                        <h4>Relacionamentos</h4>
+                        <p>FOREIGN KEY, INNER JOIN, LEFT JOIN, RIGHT JOIN</p>
+                    </div>
                 </div>
             </div>
+
+            <!-- Quiz Section -->
+            <section id="quiz" class="section">
+                <div class="section-header">
+                    <div class="section-number">🎯</div>
+                    <div class="section-title">
+                        <h2>Quiz - Teste seus conhecimentos</h2>
+                        <p>Responda aos exercícios práticos e verifique seu aprendizado</p>
+                    </div>
+                    <span class="tag tag-dml">PRÁTICA</span>
+                </div>
+
+                <div id="quiz-score" style="background: rgba(0, 117, 143, 0.1); border: 2px solid var(--primary); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; text-align: center; display: none;">
+                    <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Pontuação</h3>
+                    <p id="score-text" style="color: var(--text-primary); font-size: 1.5rem; font-weight: 700; margin: 0;"></p>
+                </div>
+
+                <!-- Question 1 -->
+                <div class="quiz-question" data-question="1">
+                    <h3 style="color: var(--secondary); margin-bottom: 1rem;">📝 Questão 1: Criar uma tabela</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.8;">
+                        Você precisa criar uma tabela chamada <strong>"produtos"</strong> com as seguintes colunas:<br>
+                        - id (número inteiro, auto incremento, chave primária)<br>
+                        - nome (texto até 50 caracteres, obrigatório)<br>
+                        - preco (decimal com 2 casas decimais)<br>
+                        - estoque (número inteiro)
+                    </p>
+                    
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="a">
+                            <span class="quiz-option-text">
+                                <code>CREATE TABLE produtos (id INT, nome VARCHAR(50), preco DECIMAL, estoque INT);</code>
+                            </span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="b">
+                            <span class="quiz-option-text">
+                                <code>CREATE TABLE produtos (id INT AUTO_INCREMENT PRIMARY KEY, nome VARCHAR(50) NOT NULL, preco DECIMAL(10,2), estoque INT);</code>
+                            </span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="c">
+                            <span class="quiz-option-text">
+                                <code>INSERT TABLE produtos (id, nome, preco, estoque);</code>
+                            </span>
+                        </label>
+                    </div>
+                    
+                    <button class="quiz-submit" onclick="checkAnswer(1, 'b')">Verificar Resposta</button>
+                    <div class="quiz-feedback" id="feedback-1"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="quiz-question" data-question="2">
+                    <h3 style="color: var(--secondary); margin-bottom: 1rem;">📝 Questão 2: Consulta com filtro</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.8;">
+                        Você tem uma tabela <strong>"alunos"</strong> e precisa selecionar apenas os alunos que nasceram entre 2000 e 2010, ordenados por nome. Qual comando usar?
+                    </p>
+                    
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="q2" value="a">
+                            <span class="quiz-option-text">
+                                <code>SELECT * FROM alunos WHERE nascimento BETWEEN '2000-01-01' AND '2010-12-31' ORDER BY nome;</code>
+                            </span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q2" value="b">
+                            <span class="quiz-option-text">
+                                <code>SELECT * FROM alunos WHERE nascimento > 2000 AND nascimento < 2010;</code>
+                            </span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q2" value="c">
+                            <span class="quiz-option-text">
+                                <code>GET alunos WHERE nascimento = 2000 TO 2010 ORDER nome;</code>
+                            </span>
+                        </label>
+                    </div>
+                    
+                    <button class="quiz-submit" onclick="checkAnswer(2, 'a')">Verificar Resposta</button>
+                    <div class="quiz-feedback" id="feedback-2"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="quiz-question" data-question="3">
+                    <h3 style="color: var(--secondary); margin-bottom: 1rem;">📝 Questão 3: Agrupamento e contagem</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.8;">
+                        Você precisa contar quantos funcionários existem em cada departamento, mostrando apenas departamentos com mais de 5 funcionários. Qual comando usar?
+                    </p>
+                    
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="q3" value="a">
+                            <span class="quiz-option-text">
+                                <code>SELECT departamento, COUNT(*) FROM funcionarios WHERE COUNT(*) > 5;</code>
+                            </span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q3" value="b">
+                            <span class="quiz-option-text">
+                                <code>SELECT departamento, COUNT(*) FROM funcionarios GROUP BY departamento HAVING COUNT(*) > 5;</code>
+                            </span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q3" value="c">
+                            <span class="quiz-option-text">
+                                <code>SELECT departamento FROM funcionarios GROUP BY departamento LIMIT 5;</code>
+                            </span>
+                        </label>
+                    </div>
+                    
+                    <button class="quiz-submit" onclick="checkAnswer(3, 'b')">Verificar Resposta</button>
+                    <div class="quiz-feedback" id="feedback-3"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="quiz-question" data-question="4">
+                    <h3 style="color: var(--secondary); margin-bottom: 1rem;">📝 Questão 4: JOIN entre tabelas</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.8;">
+                        Você tem duas tabelas: <strong>"clientes"</strong> e <strong>"pedidos"</strong>. Precisa mostrar o nome de todos os clientes e seus pedidos (se tiverem). Qual JOIN usar?
+                    </p>
+                    
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="q4" value="a">
+                            <span class="quiz-option-text">
+                                <code>SELECT clientes.nome, pedidos.numero FROM clientes INNER JOIN pedidos ON clientes.id = pedidos.cliente_id;</code>
+                            </span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q4" value="b">
+                            <span class="quiz-option-text">
+                                <code>SELECT clientes.nome, pedidos.numero FROM clientes LEFT JOIN pedidos ON clientes.id = pedidos.cliente_id;</code>
+                            </span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q4" value="c">
+                            <span class="quiz-option-text">
+                                <code>SELECT clientes.nome, pedidos.numero FROM clientes, pedidos WHERE clientes.id = pedidos.cliente_id;</code>
+                            </span>
+                        </label>
+                    </div>
+                    
+                    <button class="quiz-submit" onclick="checkAnswer(4, 'b')">Verificar Resposta</button>
+                    <div class="quiz-feedback" id="feedback-4"></div>
+                </div>
+
+                <!-- Question 5: DCL, DDL, DML -->
+                <div class="quiz-question" data-question="5">
+                    <h3 style="color: var(--secondary); margin-bottom: 1rem;">📝 Questão 5: Conceitos DCL, DDL e DML</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.8;">
+                        Considerando os conceitos de Banco de Dados, relacione os parênteses vazios aos seus conceitos, depois assinale a alternativa que apresenta a sequência correta.
+                    </p>
+                    
+                    <div style="background: var(--bg-dark); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;"><strong>1 - DCL</strong></p>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;"><strong>2 - DDL</strong></p>
+                        <p style="color: var(--text-secondary); margin-bottom: 1.5rem;"><strong>3 - DML</strong></p>
+                        
+                        <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">( ) permite conceder, retirar e controlar permissões de uso</p>
+                        <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">( ) voltado à manipulação de dados</p>
+                        <p style="color: var(--text-secondary);">( ) voltado à definição de dados</p>
+                    </div>
+                    
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="q5" value="a">
+                            <span class="quiz-option-text">1 - 2 - 3</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q5" value="b">
+                            <span class="quiz-option-text">1 - 3 - 2</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q5" value="c">
+                            <span class="quiz-option-text">2 - 1 - 3</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q5" value="d">
+                            <span class="quiz-option-text">3 - 2 - 1</span>
+                        </label>
+                    </div>
+                    
+                    <button class="quiz-submit" onclick="checkAnswer(5, 'b')">Verificar Resposta</button>
+                    <div class="quiz-feedback" id="feedback-5"></div>
+                </div>
+
+                <!-- Question 6: JOIN com tabelas Empregado e Pagamento -->
+                <div class="quiz-question" data-question="6">
+                    <h3 style="color: var(--secondary); margin-bottom: 1rem;">📝 Questão 6: Consulta com JOIN e COUNT</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.8;">
+                        Examine as tabelas Empregado e Pagamento do banco de dados a seguir e a instrução SQL, e assinale a opção correta.
+                    </p>
+                    
+                    <div style="background: var(--bg-dark); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                            <div>
+                                <p style="color: var(--primary); font-weight: bold; margin-bottom: 0.5rem;">Empregado</p>
+                                <table style="width: 100%; color: var(--text-secondary); font-size: 0.85rem; border-collapse: collapse;">
+                                    <tr style="background: rgba(0, 117, 143, 0.2);"><th style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">id</th><th style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">nome</th><th style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">idade</th></tr>
+                                    <tr><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">1</td><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">João</td><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">20</td></tr>
+                                    <tr><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">2</td><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">Maria</td><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">30</td></tr>
+                                    <tr><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">3</td><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">José</td><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">22</td></tr>
+                                    <tr><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">4</td><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">Joaquim</td><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">26</td></tr>
+                                    <tr><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">5</td><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">Manoel</td><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">21</td></tr>
+                                </table>
+                            </div>
+                            <div>
+                                <p style="color: var(--primary); font-weight: bold; margin-bottom: 0.5rem;">Pagamento</p>
+                                <table style="width: 100%; color: var(--text-secondary); font-size: 0.85rem; border-collapse: collapse;">
+                                    <tr style="background: rgba(0, 117, 143, 0.2);"><th style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">empregado_id</th><th style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">data</th><th style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">valor</th></tr>
+                                    <tr><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">1</td><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">02-jul-08</td><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">1000</td></tr>
+                                    <tr><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">2</td><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">02-jul-08</td><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">2000</td></tr>
+                                    <tr><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">3</td><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">02-jul-08</td><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">1400</td></tr>
+                                    <tr><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">4</td><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">02-jul-08</td><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">1200</td></tr>
+                                    <tr><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">5</td><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">02-jul-08</td><td style="padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1);">5000</td></tr>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <pre style="background: rgba(0, 0, 0, 0.3); padding: 1rem; border-radius: 4px; overflow-x: auto;"><code style="color: var(--text-primary);">SELECT count(*)
+FROM Empregado, Pagamento
+WHERE Empregado.id = Pagamento.empregado_id
+AND Empregado.idade < 25 AND Pagamento.valor > 1500</code></pre>
+                    </div>
+                    
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">O resultado da consulta SQL é:</p>
+                    
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="q6" value="a">
+                            <span class="quiz-option-text">0</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q6" value="b">
+                            <span class="quiz-option-text">1</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q6" value="c">
+                            <span class="quiz-option-text">2</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q6" value="d">
+                            <span class="quiz-option-text">3</span>
+                        </label>
+                    </div>
+                    
+                    <button class="quiz-submit" onclick="checkAnswer(6, 'b')">Verificar Resposta</button>
+                    <div class="quiz-feedback" id="feedback-6"></div>
+                </div>
+
+                <!-- Question 7: Propriedades ACID -->
+                <div class="quiz-question" data-question="7">
+                    <h3 style="color: var(--secondary); margin-bottom: 1rem;">📝 Questão 7: Propriedades de Transação (ACID)</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.8;">
+                        Uma transação representa uma interação entre a aplicação e o sistema de banco de dados tratada de forma única e independente. De acordo com as propriedades da transação, relacione as colunas e, a seguir, assinale a alternativa com a sequência correta.
+                    </p>
+                    
+                    <div style="background: var(--bg-dark); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;"><strong>1 - Atomicidade</strong></p>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;"><strong>2 - Consistência</strong></p>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;"><strong>3 - Isolamento</strong></p>
+                        <p style="color: var(--text-secondary); margin-bottom: 1.5rem;"><strong>4 - Durabilidade</strong></p>
+                        
+                        <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">( ) Garante que o banco de dados esteja em um estado íntegro depois de a transação ser realizada.</p>
+                        <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">( ) Garante que todas as tarefas da transação sejam cumpridas, ou a mesma seja cancelada como um todo.</p>
+                        <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">( ) Garante que o resultado de uma transação só seja visível para outras transações no momento em que ela é finalizada com sucesso.</p>
+                        <p style="color: var(--text-secondary);">( ) Garante que a transação seja persistida assim que finalizada, ou seja, não será desfeita ou perdida mesmo na ocorrência de falhas do sistema.</p>
+                    </div>
+                    
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="q7" value="a">
+                            <span class="quiz-option-text">1 - 2 - 3 - 4</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q7" value="b">
+                            <span class="quiz-option-text">2 - 1 - 3 - 4</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q7" value="c">
+                            <span class="quiz-option-text">3 - 4 - 1 - 2</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q7" value="d">
+                            <span class="quiz-option-text">4 - 3 - 2 - 1</span>
+                        </label>
+                    </div>
+                    
+                    <button class="quiz-submit" onclick="checkAnswer(7, 'b')">Verificar Resposta</button>
+                    <div class="quiz-feedback" id="feedback-7"></div>
+                </div>
+
+                <button id="reset-quiz" class="quiz-reset" onclick="resetQuiz()" style="display: none;">🔄 Refazer Quiz</button>
+            </section>
+
+            <!-- Coding Challenge Section -->
+            <section id="challenge" class="section">
+                <div class="section-header">
+                    <div class="section-number">💻</div>
+                    <div class="section-title">
+                        <h2>Desafio de Código - Pratique SQL</h2>
+                        <p>Escreva código SQL real e execute para verificar se está correto</p>
+                    </div>
+                    <span class="tag tag-ddl">CÓDIGO</span>
+                </div>
+
+                <div style="background: rgba(242, 145, 17, 0.1); border-left: 4px solid var(--secondary); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem; font-size: 1.1rem;">📋 Cenário do Desafio</h4>
+                    <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;">
+                        Você foi contratado para criar um sistema de gerenciamento de uma <strong>biblioteca</strong>. 
+                        Siga as instruções abaixo e escreva o código SQL necessário.
+                    </p>
+                    <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem;">
+                        <strong>Importante:</strong> Execute cada comando na ordem correta. O sistema verificará se sua solução está correta!
+                    </p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+                        <div style="background: rgba(0, 117, 143, 0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">14</div>
+                            <div style="color: var(--text-secondary); font-size: 0.9rem;">Exercícios Totais</div>
+                        </div>
+                        <div style="background: rgba(0, 117, 143, 0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">DDL</div>
+                            <div style="color: var(--text-secondary); font-size: 0.9rem;">CREATE, ALTER (3)</div>
+                        </div>
+                        <div style="background: rgba(0, 117, 143, 0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">DML</div>
+                            <div style="color: var(--text-secondary); font-size: 0.9rem;">INSERT, UPDATE, DELETE (4)</div>
+                        </div>
+                        <div style="background: rgba(0, 117, 143, 0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">DQL</div>
+                            <div style="color: var(--text-secondary); font-size: 0.9rem;">SELECT, WHERE, LIKE, BETWEEN (5)</div>
+                        </div>
+                        <div style="background: rgba(0, 117, 143, 0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">Agregação</div>
+                            <div style="color: var(--text-secondary); font-size: 0.9rem;">GROUP BY, HAVING (2)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Challenge 1: Create Table -->
+                <div class="challenge-task">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">🎯 Tarefa 1: Criar a tabela de livros</h3>
+                    <div style="background: var(--bg-dark); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;">
+                            Crie uma tabela chamada <code style="color: var(--secondary);">livros</code> com as seguintes colunas:
+                        </p>
+                        <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 2;">
+                            <li><strong>id</strong>: número inteiro, auto incremento, chave primária</li>
+                            <li><strong>titulo</strong>: texto até 100 caracteres, obrigatório</li>
+                            <li><strong>autor</strong>: texto até 80 caracteres, obrigatório</li>
+                            <li><strong>ano</strong>: número inteiro</li>
+                            <li><strong>preco</strong>: decimal com 2 casas decimais</li>
+                        </ul>
+                    </div>
+
+                    <textarea id="code-1" class="code-editor" placeholder="-- Digite seu código SQL aqui
+CREATE TABLE livros (
+    ...
+);"></textarea>
+                    <button class="challenge-run" onclick="runChallenge(1)">▶️ Executar Código</button>
+                    <div class="challenge-result" id="result-1"></div>
+                </div>
+
+                <!-- Challenge 2: Insert Data -->
+                <div class="challenge-task">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">🎯 Tarefa 2: Inserir livros</h3>
+                    <div style="background: var(--bg-dark); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;">
+                            Insira os seguintes livros na tabela (use DEFAULT para o id):
+                        </p>
+                        <ul style="color: var(--text-secondary); margin-left: 1.5rem; line-height: 2;">
+                            <li>'Dom Casmurro', 'Machado de Assis', 1899, 35.90</li>
+                            <li>'1984', 'George Orwell', 1949, 42.50</li>
+                            <li>'O Senhor dos Anéis', 'J.R.R. Tolkien', 1954, 89.90</li>
+                        </ul>
+                    </div>
+
+                    <textarea id="code-2" class="code-editor" placeholder="-- Digite seu código SQL aqui
+INSERT INTO livros VALUES
+(DEFAULT, '...', '...', ..., ...);"></textarea>
+                    <button class="challenge-run" onclick="runChallenge(2)">▶️ Executar Código</button>
+                    <div class="challenge-result" id="result-2"></div>
+                </div>
+
+                <!-- Challenge 3: Query with Filter -->
+                <div class="challenge-task">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">🎯 Tarefa 3: Consultar livros caros</h3>
+                    <div style="background: var(--bg-dark); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="color: var(--text-secondary); line-height: 1.8;">
+                            Selecione o <strong>titulo</strong> e <strong>preco</strong> de todos os livros com preço maior que 40.00, ordenados por preço decrescente.
+                        </p>
+                    </div>
+
+                    <textarea id="code-3" class="code-editor" placeholder="-- Digite seu código SQL aqui
+SELECT ..."></textarea>
+                    <button class="challenge-run" onclick="runChallenge(3)">▶️ Executar Código</button>
+                    <div class="challenge-result" id="result-3"></div>
+                </div>
+
+                <!-- Challenge 4: Update -->
+                <div class="challenge-task">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">🎯 Tarefa 4: Atualizar preço</h3>
+                    <div style="background: var(--bg-dark); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="color: var(--text-secondary); line-height: 1.8;">
+                            Aumente em 10% o preço de todos os livros publicados antes de 1950.
+                        </p>
+                    </div>
+
+                    <textarea id="code-4" class="code-editor" placeholder="-- Digite seu código SQL aqui
+UPDATE livros ..."></textarea>
+                    <button class="challenge-run" onclick="runChallenge(4)">▶️ Executar Código</button>
+                    <div class="challenge-result" id="result-4"></div>
+                </div>
+
+                <!-- Challenge 5: ALTER TABLE -->
+                <div class="challenge-task">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">🎯 Tarefa 5: Adicionar coluna editora</h3>
+                    <div style="background: var(--bg-dark); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="color: var(--text-secondary); line-height: 1.8;">
+                            Adicione uma nova coluna chamada <strong>editora</strong> do tipo VARCHAR(50) na tabela livros.
+                        </p>
+                    </div>
+
+                    <textarea id="code-5" class="code-editor" placeholder="-- Digite seu código SQL aqui
+ALTER TABLE livros ..."></textarea>
+                    <button class="challenge-run" onclick="runChallenge(5)">▶️ Executar Código</button>
+                    <div class="challenge-result" id="result-5"></div>
+                </div>
+
+                <!-- Challenge 6: ALTER TABLE DROP -->
+                <div class="challenge-task">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">🎯 Tarefa 6: Remover coluna editora</h3>
+                    <div style="background: var(--bg-dark); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="color: var(--text-secondary); line-height: 1.8;">
+                            Remova a coluna <strong>editora</strong> da tabela livros.
+                        </p>
+                    </div>
+
+                    <textarea id="code-6" class="code-editor" placeholder="-- Digite seu código SQL aqui
+ALTER TABLE livros ..."></textarea>
+                    <button class="challenge-run" onclick="runChallenge(6)">▶️ Executar Código</button>
+                    <div class="challenge-result" id="result-6"></div>
+                </div>
+
+                <!-- Challenge 7: DELETE -->
+                <div class="challenge-task">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">🎯 Tarefa 7: Deletar livros antigos</h3>
+                    <div style="background: var(--bg-dark); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="color: var(--text-secondary); line-height: 1.8;">
+                            Delete todos os livros publicados antes de 1900.
+                        </p>
+                    </div>
+
+                    <textarea id="code-7" class="code-editor" placeholder="-- Digite seu código SQL aqui
+DELETE FROM livros ..."></textarea>
+                    <button class="challenge-run" onclick="runChallenge(7)">▶️ Executar Código</button>
+                    <div class="challenge-result" id="result-7"></div>
+                </div>
+
+                <!-- Challenge 8: DELETE with LIKE -->
+                <div class="challenge-task">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">🎯 Tarefa 8: Deletar por título</h3>
+                    <div style="background: var(--bg-dark); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="color: var(--text-secondary); line-height: 1.8;">
+                            Delete todos os livros cujo título começa com a letra 'O'.
+                        </p>
+                    </div>
+
+                    <textarea id="code-8" class="code-editor" placeholder="-- Digite seu código SQL aqui
+DELETE FROM livros ..."></textarea>
+                    <button class="challenge-run" onclick="runChallenge(8)">▶️ Executar Código</button>
+                    <div class="challenge-result" id="result-8"></div>
+                </div>
+
+                <!-- Challenge 9: SELECT with BETWEEN -->
+                <div class="challenge-task">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">🎯 Tarefa 9: Consultar por período</h3>
+                    <div style="background: var(--bg-dark); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="color: var(--text-secondary); line-height: 1.8;">
+                            Selecione <strong>titulo</strong> e <strong>ano</strong> dos livros publicados entre 1940 e 1960.
+                        </p>
+                    </div>
+
+                    <textarea id="code-9" class="code-editor" placeholder="-- Digite seu código SQL aqui
+SELECT ..."></textarea>
+                    <button class="challenge-run" onclick="runChallenge(9)">▶️ Executar Código</button>
+                    <div class="challenge-result" id="result-9"></div>
+                </div>
+
+                <!-- Challenge 10: SELECT with LIKE -->
+                <div class="challenge-task">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">🎯 Tarefa 10: Buscar por autor</h3>
+                    <div style="background: var(--bg-dark); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="color: var(--text-secondary); line-height: 1.8;">
+                            Selecione todos os campos dos livros cujo autor contém 'Machado' no nome.
+                        </p>
+                    </div>
+
+                    <textarea id="code-10" class="code-editor" placeholder="-- Digite seu código SQL aqui
+SELECT ..."></textarea>
+                    <button class="challenge-run" onclick="runChallenge(10)">▶️ Executar Código</button>
+                    <div class="challenge-result" id="result-10"></div>
+                </div>
+
+                <!-- Challenge 11: SELECT with LIMIT -->
+                <div class="challenge-task">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">🎯 Tarefa 11: Limitar resultados</h3>
+                    <div style="background: var(--bg-dark); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="color: var(--text-secondary); line-height: 1.8;">
+                            Selecione <strong>titulo</strong> e <strong>preco</strong> dos 2 livros mais caros (ordenados por preço decrescente).
+                        </p>
+                    </div>
+
+                    <textarea id="code-11" class="code-editor" placeholder="-- Digite seu código SQL aqui
+SELECT ..."></textarea>
+                    <button class="challenge-run" onclick="runChallenge(11)">▶️ Executar Código</button>
+                    <div class="challenge-result" id="result-11"></div>
+                </div>
+
+                <!-- Challenge 12: SELECT with IN -->
+                <div class="challenge-task">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">🎯 Tarefa 12: Filtrar por lista</h3>
+                    <div style="background: var(--bg-dark); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="color: var(--text-secondary); line-height: 1.8;">
+                            Selecione <strong>titulo</strong> e <strong>ano</strong> dos livros publicados nos anos 1949, 1954 ou 1960.
+                        </p>
+                    </div>
+
+                    <textarea id="code-12" class="code-editor" placeholder="-- Digite seu código SQL aqui
+SELECT ..."></textarea>
+                    <button class="challenge-run" onclick="runChallenge(12)">▶️ Executar Código</button>
+                    <div class="challenge-result" id="result-12"></div>
+                </div>
+
+                <!-- Challenge 13: COUNT and GROUP BY -->
+                <div class="challenge-task">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">🎯 Tarefa 13: Contar livros por década</h3>
+                    <div style="background: var(--bg-dark); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="color: var(--text-secondary); line-height: 1.8;">
+                            Conte quantos livros existem agrupados por <strong>ano</strong>, ordenando por ano.
+                        </p>
+                    </div>
+
+                    <textarea id="code-13" class="code-editor" placeholder="-- Digite seu código SQL aqui
+SELECT ano, COUNT(*) ..."></textarea>
+                    <button class="challenge-run" onclick="runChallenge(13)">▶️ Executar Código</button>
+                    <div class="challenge-result" id="result-13"></div>
+                </div>
+
+                <!-- Challenge 14: AVG and HAVING -->
+                <div class="challenge-task">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">🎯 Tarefa 14: Média de preços</h3>
+                    <div style="background: var(--bg-dark); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="color: var(--text-secondary); line-height: 1.8;">
+                            Calcule a média de preço dos livros agrupados por <strong>ano</strong>, mostrando apenas anos com média acima de 40.
+                        </p>
+                    </div>
+
+                    <textarea id="code-14" class="code-editor" placeholder="-- Digite seu código SQL aqui
+SELECT ano, AVG(preco) ..."></textarea>
+                    <button class="challenge-run" onclick="runChallenge(14)">▶️ Executar Código</button>
+                    <div class="challenge-result" id="result-14"></div>
+                </div>
+
+                <!-- Final Score -->
+                <div id="challenge-score" style="background: linear-gradient(135deg, rgba(0, 117, 143, 0.1), rgba(242, 145, 17, 0.1)); border: 2px solid var(--primary); border-radius: 12px; padding: 2rem; margin-top: 2rem; text-align: center; display: none;">
+                    <h3 style="color: var(--secondary); margin-bottom: 1rem; font-size: 1.5rem;">🎉 Desafio Concluído!</h3>
+                    <p id="challenge-score-text" style="color: var(--text-primary); font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;"></p>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem;">Parabéns! Você completou todos os desafios de código SQL.</p>
+                    <button class="quiz-reset" onclick="resetChallenge()" style="margin-top: 1.5rem;">🔄 Refazer Desafio</button>
+                </div>
+            </section>
         </main>
     </div>
 
@@ -1377,9 +2918,871 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
+                    
+                    // Update active state in sidebar
+                    updateSidebarActive(this.getAttribute('href'));
                 }
             });
         });
+
+        // Update sidebar active state on scroll
+        function updateSidebarActive(hash) {
+            document.querySelectorAll('.sidebar-index-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === hash) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Intersection Observer for sidebar active state
+        const sections = document.querySelectorAll('section[id]');
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    updateSidebarActive('#' + entry.target.id);
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Quiz functionality
+        let correctAnswers = 0;
+        let totalQuestions = 7;
+        let answeredQuestions = new Set();
+
+        function checkAnswer(questionNum, correctOption) {
+            const selectedOption = document.querySelector(`input[name="q${questionNum}"]:checked`);
+            const feedback = document.getElementById(`feedback-${questionNum}`);
+            const submitBtn = event.target;
+            const questionDiv = document.querySelector(`.quiz-question[data-question="${questionNum}"]`);
+            const options = questionDiv.querySelectorAll('.quiz-option');
+
+            if (!selectedOption) {
+                alert('Por favor, selecione uma resposta!');
+                return;
+            }
+
+            // Disable all options and submit button
+            submitBtn.disabled = true;
+            options.forEach(opt => {
+                const input = opt.querySelector('input');
+                input.disabled = true;
+            });
+
+            // Check if already answered
+            if (answeredQuestions.has(questionNum)) {
+                return;
+            }
+
+            answeredQuestions.add(questionNum);
+
+            const userAnswer = selectedOption.value;
+            const isCorrect = userAnswer === correctOption;
+
+            // Highlight correct and incorrect answers
+            options.forEach(opt => {
+                const input = opt.querySelector('input');
+                if (input.value === correctOption) {
+                    opt.classList.add('correct');
+                } else if (input.checked && input.value !== correctOption) {
+                    opt.classList.add('incorrect');
+                }
+            });
+
+            // Show feedback
+            feedback.classList.add('show');
+            if (isCorrect) {
+                correctAnswers++;
+                feedback.classList.add('correct');
+                feedback.innerHTML = '<strong>✅ Correto!</strong><p style="color: var(--text-secondary); margin-top: 0.5rem;">Excelente! Você entendeu o conceito.</p>';
+            } else {
+                feedback.classList.add('incorrect');
+                feedback.innerHTML = '<strong>❌ Incorreto</strong><p style="color: var(--text-secondary); margin-top: 0.5rem;">Revise o conteúdo e tente novamente. A resposta correta está destacada em verde.</p>';
+            }
+
+            // Update score
+            updateScore();
+
+            // Show reset button if all questions answered
+            if (answeredQuestions.size === totalQuestions) {
+                document.getElementById('reset-quiz').style.display = 'block';
+            }
+        }
+
+        function updateScore() {
+            const scoreDiv = document.getElementById('quiz-score');
+            const scoreText = document.getElementById('score-text');
+            const percentage = Math.round((correctAnswers / answeredQuestions.size) * 100);
+            
+            scoreDiv.style.display = 'block';
+            scoreText.textContent = `${correctAnswers} de ${answeredQuestions.size} corretas (${percentage}%)`;
+
+            // Change color based on performance
+            if (percentage >= 75) {
+                scoreDiv.style.borderColor = 'var(--success)';
+                scoreDiv.style.background = 'rgba(63, 185, 80, 0.1)';
+            } else if (percentage >= 50) {
+                scoreDiv.style.borderColor = 'var(--secondary)';
+                scoreDiv.style.background = 'rgba(242, 145, 17, 0.1)';
+            } else {
+                scoreDiv.style.borderColor = 'var(--danger)';
+                scoreDiv.style.background = 'rgba(248, 81, 73, 0.1)';
+            }
+        }
+
+        function resetQuiz() {
+            // Reset counters
+            correctAnswers = 0;
+            answeredQuestions.clear();
+
+            // Reset all questions
+            document.querySelectorAll('.quiz-question').forEach(question => {
+                // Reset radio buttons
+                question.querySelectorAll('input[type="radio"]').forEach(input => {
+                    input.checked = false;
+                    input.disabled = false;
+                });
+
+                // Reset options styling
+                question.querySelectorAll('.quiz-option').forEach(opt => {
+                    opt.classList.remove('correct', 'incorrect');
+                });
+
+                // Reset submit button
+                const submitBtn = question.querySelector('.quiz-submit');
+                submitBtn.disabled = false;
+
+                // Hide feedback
+                const feedback = question.querySelector('.quiz-feedback');
+                feedback.classList.remove('show', 'correct', 'incorrect');
+                feedback.innerHTML = '';
+            });
+
+            // Hide score and reset button
+            document.getElementById('quiz-score').style.display = 'none';
+            document.getElementById('reset-quiz').style.display = 'none';
+
+            // Scroll to quiz section
+            document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Challenge functionality
+        let challengeCompleted = new Set();
+        const totalChallenges = 14;
+
+        const challengeAnswers = {
+            1: {
+                validate: function(code) {
+                    const normalized = code.toUpperCase().replace(/\s+/g, ' ').trim();
+                    
+                    // Check if ends with semicolon
+                    if (!code.trim().endsWith(';')) {
+                        return { valid: false, error: 'O comando SQL deve terminar com <code>;</code>' };
+                    }
+                    
+                    // Check basic structure
+                    if (!normalized.includes('CREATE TABLE LIVROS')) {
+                        return { valid: false, error: 'Você precisa usar <code>CREATE TABLE livros</code>' };
+                    }
+                    
+                    // Check if has opening and closing parentheses
+                    if (!normalized.includes('(') || !normalized.includes(')')) {
+                        return { valid: false, error: 'A definição das colunas deve estar entre parênteses <code>( ... )</code>' };
+                    }
+                    
+                    // Extract content between parentheses
+                    const match = code.match(/CREATE\s+TABLE\s+livros\s*\(([\s\S]*)\)\s*;/i);
+                    if (!match) {
+                        return { valid: false, error: 'Sintaxe incorreta. Use: <code>CREATE TABLE livros ( ... );</code>' };
+                    }
+                    
+                    const columnsText = match[1].trim();
+                    
+                    // Check for proper comma usage (should have commas between columns)
+                    const columns = columnsText.split(',').map(c => c.trim()).filter(c => c.length > 0);
+                    if (columns.length < 5) {
+                        return { valid: false, error: 'Você precisa definir 5 colunas separadas por vírgula.' };
+                    }
+                    
+                    // Check for required columns with proper syntax
+                    const requiredColumns = [
+                        { 
+                            name: 'ID', 
+                            type: 'INT', 
+                            constraints: ['AUTO_INCREMENT', 'PRIMARY KEY'],
+                            pattern: /id\s+int\s+auto_increment\s+primary\s+key/i
+                        },
+                        { 
+                            name: 'TITULO', 
+                            type: 'VARCHAR(100)', 
+                            constraints: ['NOT NULL'],
+                            pattern: /titulo\s+varchar\s*\(\s*100\s*\)\s+not\s+null/i
+                        },
+                        { 
+                            name: 'AUTOR', 
+                            type: 'VARCHAR(80)', 
+                            constraints: ['NOT NULL'],
+                            pattern: /autor\s+varchar\s*\(\s*80\s*\)\s+not\s+null/i
+                        },
+                        { 
+                            name: 'ANO', 
+                            type: 'INT',
+                            pattern: /ano\s+int/i
+                        },
+                        { 
+                            name: 'PRECO', 
+                            type: 'DECIMAL',
+                            pattern: /preco\s+decimal/i
+                        }
+                    ];
+                    
+                    for (let col of requiredColumns) {
+                        // Check if column exists with proper syntax
+                        if (!col.pattern.test(columnsText)) {
+                            if (!normalized.includes(col.name)) {
+                                return { valid: false, error: `Falta a coluna <code>${col.name.toLowerCase()}</code>` };
+                            }
+                            if (!normalized.includes(col.type.split('(')[0])) {
+                                return { valid: false, error: `A coluna ${col.name.toLowerCase()} precisa ser do tipo <code>${col.type}</code>` };
+                            }
+                            if (col.constraints) {
+                                for (let constraint of col.constraints) {
+                                    if (!normalized.includes(constraint)) {
+                                        return { valid: false, error: `A coluna ${col.name.toLowerCase()} precisa ter <code>${constraint}</code>` };
+                                    }
+                                }
+                            }
+                            return { valid: false, error: `Sintaxe incorreta na coluna <code>${col.name.toLowerCase()}</code>. Verifique espaços e ordem dos atributos.` };
+                        }
+                    }
+                    
+                    return { valid: true };
+                }
+            },
+            2: {
+                validate: function(code) {
+                    const normalized = code.toUpperCase().replace(/\s+/g, ' ').trim();
+                    
+                    // Check if ends with semicolon
+                    if (!code.trim().endsWith(';')) {
+                        return { valid: false, error: 'O comando SQL deve terminar com <code>;</code>' };
+                    }
+                    
+                    if (!normalized.includes('INSERT INTO LIVROS')) {
+                        return { valid: false, error: 'Use <code>INSERT INTO livros</code>' };
+                    }
+                    
+                    if (!normalized.includes('VALUES')) {
+                        return { valid: false, error: 'Você precisa usar <code>VALUES</code>' };
+                    }
+                    
+                    // Check for proper VALUES syntax
+                    const valuesMatch = code.match(/VALUES\s*([\s\S]*);/i);
+                    if (!valuesMatch) {
+                        return { valid: false, error: 'Sintaxe incorreta. Use: <code>INSERT INTO livros VALUES (...);</code>' };
+                    }
+                    
+                    const valuesSection = valuesMatch[1].trim();
+                    
+                    // Check for proper comma usage in VALUES - should have ), ( pattern
+                    const recordSeparators = (valuesSection.match(/\)\s*,\s*\(/g) || []).length;
+                    if (recordSeparators < 2) {
+                        return { valid: false, error: 'Separe cada registro com vírgula: <code>(...), (...), (...);</code>' };
+                    }
+                    
+                    // Count opening and closing parentheses
+                    const openParen = (valuesSection.match(/\(/g) || []).length;
+                    const closeParen = (valuesSection.match(/\)/g) || []).length;
+                    if (openParen !== 3 || closeParen !== 3) {
+                        return { valid: false, error: 'Você precisa inserir exatamente 3 registros, cada um entre parênteses.' };
+                    }
+                    
+                    // Check for required books
+                    const requiredBooks = [
+                        { title: 'DOM CASMURRO', author: 'MACHADO DE ASSIS', year: '1899', price: '35.90' },
+                        { title: '1984', author: 'GEORGE ORWELL', year: '1949', price: '42.50' },
+                        { title: 'O SENHOR DOS ANÉIS', author: 'J.R.R. TOLKIEN', year: '1954', price: '89.90' }
+                    ];
+                    
+                    for (let book of requiredBooks) {
+                        if (!normalized.includes(book.title)) {
+                            return { valid: false, error: `Falta o livro <code>${book.title}</code>` };
+                        }
+                        if (!normalized.includes(book.author)) {
+                            return { valid: false, error: `Falta o autor <code>${book.author}</code>` };
+                        }
+                    }
+                    
+                    // Check for DEFAULT
+                    const defaultCount = (code.match(/DEFAULT/gi) || []).length;
+                    if (defaultCount < 3) {
+                        return { valid: false, error: 'Use <code>DEFAULT</code> para o id de cada livro (3 vezes)' };
+                    }
+                    
+                    // Check if each record has proper comma separation inside parentheses
+                    const records = valuesSection.match(/\([^)]+\)/g);
+                    if (records) {
+                        for (let i = 0; i < records.length; i++) {
+                            const commasInRecord = (records[i].match(/,/g) || []).length;
+                            if (commasInRecord < 4) {
+                                return { valid: false, error: `Registro ${i + 1} precisa ter 5 valores separados por vírgula: <code>(DEFAULT, 'titulo', 'autor', ano, preco)</code>` };
+                            }
+                        }
+                    }
+                    
+                    return { valid: true };
+                }
+            },
+            3: {
+                validate: function(code) {
+                    const normalized = code.toUpperCase().replace(/\s+/g, ' ').trim();
+                    
+                    // Check if ends with semicolon
+                    if (!code.trim().endsWith(';')) {
+                        return { valid: false, error: 'O comando SQL deve terminar com <code>;</code>' };
+                    }
+                    
+                    if (!normalized.includes('SELECT')) {
+                        return { valid: false, error: 'Use <code>SELECT</code> para consultar' };
+                    }
+                    
+                    // Check if has both columns
+                    if (!normalized.includes('TITULO')) {
+                        return { valid: false, error: 'Você precisa selecionar a coluna <code>titulo</code>' };
+                    }
+                    
+                    if (!normalized.includes('PRECO')) {
+                        return { valid: false, error: 'Você precisa selecionar a coluna <code>preco</code>' };
+                    }
+                    
+                    // Check comma between columns in SELECT
+                    const selectMatch = code.match(/SELECT\s+(.*?)\s+FROM/i);
+                    if (selectMatch) {
+                        const selectedColumns = selectMatch[1].trim();
+                        if (!selectedColumns.includes(',')) {
+                            return { valid: false, error: 'Separe as colunas com vírgula: <code>SELECT titulo, preco</code>' };
+                        }
+                    } else {
+                        return { valid: false, error: 'Sintaxe incorreta. Use: <code>SELECT titulo, preco FROM livros ...</code>' };
+                    }
+                    
+                    if (!normalized.includes('FROM LIVROS')) {
+                        return { valid: false, error: 'Use <code>FROM livros</code>' };
+                    }
+                    
+                    if (!normalized.includes('WHERE')) {
+                        return { valid: false, error: 'Use <code>WHERE</code> para filtrar' };
+                    }
+                    
+                    // Check for proper WHERE condition
+                    if (!normalized.includes('PRECO > 40') && !normalized.includes('PRECO>40')) {
+                        return { valid: false, error: 'Filtre por <code>preco > 40</code>' };
+                    }
+                    
+                    if (!normalized.includes('ORDER BY')) {
+                        return { valid: false, error: 'Use <code>ORDER BY</code> para ordenar' };
+                    }
+                    
+                    // Check if ORDER BY is followed by a column
+                    const orderByMatch = code.match(/ORDER\s+BY\s+(\w+)/i);
+                    if (!orderByMatch) {
+                        return { valid: false, error: 'Especifique a coluna após <code>ORDER BY</code>' };
+                    }
+                    
+                    if (!normalized.includes('DESC')) {
+                        return { valid: false, error: 'Ordene de forma decrescente com <code>DESC</code>' };
+                    }
+                    
+                    return { valid: true };
+                }
+            },
+            4: {
+                validate: function(code) {
+                    const normalized = code.toUpperCase().replace(/\s+/g, ' ').trim();
+                    
+                    // Check if ends with semicolon
+                    if (!code.trim().endsWith(';')) {
+                        return { valid: false, error: 'O comando SQL deve terminar com <code>;</code>' };
+                    }
+                    
+                    if (!normalized.includes('UPDATE LIVROS')) {
+                        return { valid: false, error: 'Use <code>UPDATE livros</code>' };
+                    }
+                    
+                    if (!normalized.includes('SET')) {
+                        return { valid: false, error: 'Use <code>SET</code> para definir novos valores' };
+                    }
+                    
+                    if (!normalized.includes('PRECO')) {
+                        return { valid: false, error: 'Você precisa atualizar a coluna <code>preco</code>' };
+                    }
+                    
+                    // Check for proper SET syntax with equals sign
+                    const setMatch = code.match(/SET\s+(.*?)\s+WHERE/i);
+                    if (!setMatch) {
+                        return { valid: false, error: 'Sintaxe incorreta. Use: <code>UPDATE livros SET preco = ... WHERE ...</code>' };
+                    }
+                    
+                    const setClause = setMatch[1].trim();
+                    if (!setClause.includes('=')) {
+                        return { valid: false, error: 'Use <code>=</code> para atribuir o novo valor: <code>SET preco = ...</code>' };
+                    }
+                    
+                    // Check for multiplication by 1.1 (10% increase)
+                    if (!code.match(/preco\s*=\s*preco\s*\*\s*1\.1/i)) {
+                        return { valid: false, error: 'Para aumentar 10%, use: <code>preco = preco * 1.1</code>' };
+                    }
+                    
+                    if (!normalized.includes('WHERE')) {
+                        return { valid: false, error: 'Use <code>WHERE</code> para filtrar quais livros atualizar' };
+                    }
+                    
+                    // Check for proper WHERE condition
+                    if (!normalized.includes('ANO < 1950') && !normalized.includes('ANO<1950')) {
+                        return { valid: false, error: 'Filtre por <code>ano < 1950</code>' };
+                    }
+                    
+                    return { valid: true };
+                }
+            },
+            5: {
+                validate: function(code) {
+                    const normalized = code.toUpperCase().replace(/\s+/g, ' ').trim();
+                    
+                    if (!code.trim().endsWith(';')) {
+                        return { valid: false, error: 'O comando SQL deve terminar com <code>;</code>' };
+                    }
+                    
+                    if (!normalized.includes('ALTER TABLE LIVROS')) {
+                        return { valid: false, error: 'Use <code>ALTER TABLE livros</code>' };
+                    }
+                    
+                    if (!normalized.includes('ADD')) {
+                        return { valid: false, error: 'Use <code>ADD</code> para adicionar uma coluna' };
+                    }
+                    
+                    if (!normalized.includes('EDITORA')) {
+                        return { valid: false, error: 'A coluna deve se chamar <code>editora</code>' };
+                    }
+                    
+                    if (!normalized.includes('VARCHAR') || !code.match(/VARCHAR\s*\(\s*50\s*\)/i)) {
+                        return { valid: false, error: 'Use o tipo <code>VARCHAR(50)</code>' };
+                    }
+                    
+                    return { valid: true };
+                }
+            },
+            6: {
+                validate: function(code) {
+                    const normalized = code.toUpperCase().replace(/\s+/g, ' ').trim();
+                    
+                    if (!code.trim().endsWith(';')) {
+                        return { valid: false, error: 'O comando SQL deve terminar com <code>;</code>' };
+                    }
+                    
+                    if (!normalized.includes('ALTER TABLE LIVROS')) {
+                        return { valid: false, error: 'Use <code>ALTER TABLE livros</code>' };
+                    }
+                    
+                    if (!normalized.includes('DROP')) {
+                        return { valid: false, error: 'Use <code>DROP COLUMN</code> para remover uma coluna' };
+                    }
+                    
+                    if (!normalized.includes('EDITORA')) {
+                        return { valid: false, error: 'Remova a coluna <code>editora</code>' };
+                    }
+                    
+                    return { valid: true };
+                }
+            },
+            7: {
+                validate: function(code) {
+                    const normalized = code.toUpperCase().replace(/\s+/g, ' ').trim();
+                    
+                    if (!code.trim().endsWith(';')) {
+                        return { valid: false, error: 'O comando SQL deve terminar com <code>;</code>' };
+                    }
+                    
+                    if (!normalized.includes('DELETE FROM LIVROS')) {
+                        return { valid: false, error: 'Use <code>DELETE FROM livros</code>' };
+                    }
+                    
+                    if (!normalized.includes('WHERE')) {
+                        return { valid: false, error: 'Use <code>WHERE</code> para especificar quais registros deletar' };
+                    }
+                    
+                    if (!normalized.includes('ANO < 1900') && !normalized.includes('ANO<1900')) {
+                        return { valid: false, error: 'Filtre por <code>ano < 1900</code>' };
+                    }
+                    
+                    return { valid: true };
+                }
+            },
+            8: {
+                validate: function(code) {
+                    const normalized = code.toUpperCase().replace(/\s+/g, ' ').trim();
+                    
+                    if (!code.trim().endsWith(';')) {
+                        return { valid: false, error: 'O comando SQL deve terminar com <code>;</code>' };
+                    }
+                    
+                    if (!normalized.includes('DELETE FROM LIVROS')) {
+                        return { valid: false, error: 'Use <code>DELETE FROM livros</code>' };
+                    }
+                    
+                    if (!normalized.includes('WHERE')) {
+                        return { valid: false, error: 'Use <code>WHERE</code> para especificar quais registros deletar' };
+                    }
+                    
+                    if (!normalized.includes('LIKE')) {
+                        return { valid: false, error: 'Use <code>LIKE</code> para buscar padrões' };
+                    }
+                    
+                    if (!code.match(/titulo\s+LIKE\s+'O%'/i)) {
+                        return { valid: false, error: 'Use <code>titulo LIKE \'O%\'</code> para títulos que começam com O' };
+                    }
+                    
+                    return { valid: true };
+                }
+            },
+            9: {
+                validate: function(code) {
+                    const normalized = code.toUpperCase().replace(/\s+/g, ' ').trim();
+                    
+                    if (!code.trim().endsWith(';')) {
+                        return { valid: false, error: 'O comando SQL deve terminar com <code>;</code>' };
+                    }
+                    
+                    if (!normalized.includes('SELECT')) {
+                        return { valid: false, error: 'Use <code>SELECT</code> para consultar' };
+                    }
+                    
+                    if (!normalized.includes('TITULO') || !normalized.includes('ANO')) {
+                        return { valid: false, error: 'Selecione as colunas <code>titulo</code> e <code>ano</code>' };
+                    }
+                    
+                    const selectMatch = code.match(/SELECT\s+(.*?)\s+FROM/i);
+                    if (selectMatch && !selectMatch[1].includes(',')) {
+                        return { valid: false, error: 'Separe as colunas com vírgula' };
+                    }
+                    
+                    if (!normalized.includes('FROM LIVROS')) {
+                        return { valid: false, error: 'Use <code>FROM livros</code>' };
+                    }
+                    
+                    if (!normalized.includes('WHERE')) {
+                        return { valid: false, error: 'Use <code>WHERE</code> para filtrar' };
+                    }
+                    
+                    if (!normalized.includes('BETWEEN')) {
+                        return { valid: false, error: 'Use <code>BETWEEN</code> para filtrar por intervalo' };
+                    }
+                    
+                    if (!code.match(/ano\s+BETWEEN\s+1940\s+AND\s+1960/i)) {
+                        return { valid: false, error: 'Use <code>ano BETWEEN 1940 AND 1960</code>' };
+                    }
+                    
+                    return { valid: true };
+                }
+            },
+            10: {
+                validate: function(code) {
+                    const normalized = code.toUpperCase().replace(/\s+/g, ' ').trim();
+                    
+                    if (!code.trim().endsWith(';')) {
+                        return { valid: false, error: 'O comando SQL deve terminar com <code>;</code>' };
+                    }
+                    
+                    if (!normalized.includes('SELECT')) {
+                        return { valid: false, error: 'Use <code>SELECT</code> para consultar' };
+                    }
+                    
+                    if (!normalized.includes('FROM LIVROS')) {
+                        return { valid: false, error: 'Use <code>FROM livros</code>' };
+                    }
+                    
+                    if (!normalized.includes('WHERE')) {
+                        return { valid: false, error: 'Use <code>WHERE</code> para filtrar' };
+                    }
+                    
+                    if (!normalized.includes('LIKE')) {
+                        return { valid: false, error: 'Use <code>LIKE</code> para buscar padrões' };
+                    }
+                    
+                    if (!code.match(/autor\s+LIKE\s+'%Machado%'/i)) {
+                        return { valid: false, error: 'Use <code>autor LIKE \'%Machado%\'</code> para buscar Machado no nome' };
+                    }
+                    
+                    return { valid: true };
+                }
+            },
+            11: {
+                validate: function(code) {
+                    const normalized = code.toUpperCase().replace(/\s+/g, ' ').trim();
+                    
+                    if (!code.trim().endsWith(';')) {
+                        return { valid: false, error: 'O comando SQL deve terminar com <code>;</code>' };
+                    }
+                    
+                    if (!normalized.includes('SELECT')) {
+                        return { valid: false, error: 'Use <code>SELECT</code> para consultar' };
+                    }
+                    
+                    if (!normalized.includes('TITULO') || !normalized.includes('PRECO')) {
+                        return { valid: false, error: 'Selecione as colunas <code>titulo</code> e <code>preco</code>' };
+                    }
+                    
+                    if (!normalized.includes('FROM LIVROS')) {
+                        return { valid: false, error: 'Use <code>FROM livros</code>' };
+                    }
+                    
+                    if (!normalized.includes('ORDER BY')) {
+                        return { valid: false, error: 'Use <code>ORDER BY</code> para ordenar' };
+                    }
+                    
+                    if (!normalized.includes('DESC')) {
+                        return { valid: false, error: 'Ordene de forma decrescente com <code>DESC</code>' };
+                    }
+                    
+                    if (!normalized.includes('LIMIT')) {
+                        return { valid: false, error: 'Use <code>LIMIT</code> para limitar os resultados' };
+                    }
+                    
+                    if (!code.match(/LIMIT\s+2/i)) {
+                        return { valid: false, error: 'Use <code>LIMIT 2</code> para retornar apenas 2 registros' };
+                    }
+                    
+                    return { valid: true };
+                }
+            },
+            12: {
+                validate: function(code) {
+                    const normalized = code.toUpperCase().replace(/\s+/g, ' ').trim();
+                    
+                    if (!code.trim().endsWith(';')) {
+                        return { valid: false, error: 'O comando SQL deve terminar com <code>;</code>' };
+                    }
+                    
+                    if (!normalized.includes('SELECT')) {
+                        return { valid: false, error: 'Use <code>SELECT</code> para consultar' };
+                    }
+                    
+                    if (!normalized.includes('TITULO') || !normalized.includes('ANO')) {
+                        return { valid: false, error: 'Selecione as colunas <code>titulo</code> e <code>ano</code>' };
+                    }
+                    
+                    if (!normalized.includes('FROM LIVROS')) {
+                        return { valid: false, error: 'Use <code>FROM livros</code>' };
+                    }
+                    
+                    if (!normalized.includes('WHERE')) {
+                        return { valid: false, error: 'Use <code>WHERE</code> para filtrar' };
+                    }
+                    
+                    if (!normalized.includes('IN')) {
+                        return { valid: false, error: 'Use <code>IN</code> para filtrar por lista de valores' };
+                    }
+                    
+                    if (!code.match(/ano\s+IN\s*\(\s*1949\s*,\s*1954\s*,\s*1960\s*\)/i)) {
+                        return { valid: false, error: 'Use <code>ano IN (1949, 1954, 1960)</code>' };
+                    }
+                    
+                    return { valid: true };
+                }
+            },
+            13: {
+                validate: function(code) {
+                    const normalized = code.toUpperCase().replace(/\s+/g, ' ').trim();
+                    
+                    if (!code.trim().endsWith(';')) {
+                        return { valid: false, error: 'O comando SQL deve terminar com <code>;</code>' };
+                    }
+                    
+                    if (!normalized.includes('SELECT')) {
+                        return { valid: false, error: 'Use <code>SELECT</code> para consultar' };
+                    }
+                    
+                    if (!normalized.includes('ANO')) {
+                        return { valid: false, error: 'Selecione a coluna <code>ano</code>' };
+                    }
+                    
+                    if (!normalized.includes('COUNT')) {
+                        return { valid: false, error: 'Use <code>COUNT(*)</code> para contar registros' };
+                    }
+                    
+                    if (!normalized.includes('FROM LIVROS')) {
+                        return { valid: false, error: 'Use <code>FROM livros</code>' };
+                    }
+                    
+                    if (!normalized.includes('GROUP BY')) {
+                        return { valid: false, error: 'Use <code>GROUP BY</code> para agrupar' };
+                    }
+                    
+                    if (!code.match(/GROUP\s+BY\s+ano/i)) {
+                        return { valid: false, error: 'Agrupe por <code>ano</code>' };
+                    }
+                    
+                    if (!normalized.includes('ORDER BY')) {
+                        return { valid: false, error: 'Use <code>ORDER BY</code> para ordenar' };
+                    }
+                    
+                    return { valid: true };
+                }
+            },
+            14: {
+                validate: function(code) {
+                    const normalized = code.toUpperCase().replace(/\s+/g, ' ').trim();
+                    
+                    if (!code.trim().endsWith(';')) {
+                        return { valid: false, error: 'O comando SQL deve terminar com <code>;</code>' };
+                    }
+                    
+                    if (!normalized.includes('SELECT')) {
+                        return { valid: false, error: 'Use <code>SELECT</code> para consultar' };
+                    }
+                    
+                    if (!normalized.includes('ANO')) {
+                        return { valid: false, error: 'Selecione a coluna <code>ano</code>' };
+                    }
+                    
+                    if (!normalized.includes('AVG')) {
+                        return { valid: false, error: 'Use <code>AVG(preco)</code> para calcular a média' };
+                    }
+                    
+                    if (!normalized.includes('FROM LIVROS')) {
+                        return { valid: false, error: 'Use <code>FROM livros</code>' };
+                    }
+                    
+                    if (!normalized.includes('GROUP BY')) {
+                        return { valid: false, error: 'Use <code>GROUP BY</code> para agrupar' };
+                    }
+                    
+                    if (!code.match(/GROUP\s+BY\s+ano/i)) {
+                        return { valid: false, error: 'Agrupe por <code>ano</code>' };
+                    }
+                    
+                    if (!normalized.includes('HAVING')) {
+                        return { valid: false, error: 'Use <code>HAVING</code> para filtrar grupos' };
+                    }
+                    
+                    if (!code.match(/HAVING\s+AVG\s*\(\s*preco\s*\)\s*>\s*40/i)) {
+                        return { valid: false, error: 'Use <code>HAVING AVG(preco) > 40</code>' };
+                    }
+                    
+                    return { valid: true };
+                }
+            }
+        };
+
+        function runChallenge(challengeNum) {
+            try {
+                const code = document.getElementById(`code-${challengeNum}`).value.trim();
+                const result = document.getElementById(`result-${challengeNum}`);
+                const answer = challengeAnswers[challengeNum];
+
+                if (!code) {
+                    showChallengeResult(challengeNum, false, 'Por favor, escreva algum código SQL antes de executar!');
+                    return;
+                }
+
+                if (!answer || typeof answer.validate !== 'function') {
+                    showChallengeResult(challengeNum, false, 'Erro interno: validação não encontrada.');
+                    return;
+                }
+
+                // Validate the code
+                const validation = answer.validate(code);
+
+                if (validation.valid) {
+                    challengeCompleted.add(challengeNum);
+                    showChallengeResult(challengeNum, true, getSuccessMessage(challengeNum));
+                    checkAllChallengesCompleted();
+                } else {
+                    showChallengeResult(challengeNum, false, validation.error);
+                }
+            } catch (error) {
+                console.error('Erro ao executar desafio:', error);
+                showChallengeResult(challengeNum, false, 'Erro ao validar código: ' + error.message);
+            }
+        }
+
+        function showChallengeResult(challengeNum, success, message) {
+            const result = document.getElementById(`result-${challengeNum}`);
+            result.classList.remove('success', 'error');
+            result.classList.add('show', success ? 'success' : 'error');
+            
+            const icon = success ? '✅' : '❌';
+            const title = success ? 'Correto!' : 'Ops! Algo está errado';
+            
+            result.innerHTML = `
+                <h4>${icon} ${title}</h4>
+                <p>${message}</p>
+            `;
+        }
+
+        function getSuccessMessage(challengeNum) {
+            const messages = {
+                1: 'Excelente! Você criou a tabela corretamente com todas as colunas e constraints necessárias.',
+                2: 'Perfeito! Os três livros foram inseridos corretamente na tabela.',
+                3: 'Muito bem! Sua consulta retornou os livros com preço acima de 40.00 ordenados corretamente.',
+                4: 'Ótimo trabalho! Você atualizou os preços dos livros antigos com sucesso.',
+                5: 'Excelente! A coluna editora foi adicionada à tabela.',
+                6: 'Perfeito! A coluna editora foi removida da tabela.',
+                7: 'Muito bem! Os livros antigos foram deletados corretamente.',
+                8: 'Ótimo! Você deletou os livros cujo título começa com "O".',
+                9: 'Excelente! Sua consulta filtrou corretamente os livros entre 1940 e 1960.',
+                10: 'Perfeito! Você encontrou os livros do autor Machado.',
+                11: 'Muito bem! Você selecionou os 2 livros mais caros.',
+                12: 'Ótimo! Você filtrou os livros pelos anos especificados.',
+                13: 'Excelente! Você agrupou e contou os livros por ano.',
+                14: 'Perfeito! Você calculou a média de preços e filtrou com HAVING corretamente.'
+            };
+            return messages[challengeNum];
+        }
+
+        function checkAllChallengesCompleted() {
+            if (challengeCompleted.size === totalChallenges) {
+                const scoreDiv = document.getElementById('challenge-score');
+                const scoreText = document.getElementById('challenge-score-text');
+                
+                scoreDiv.style.display = 'block';
+                scoreText.textContent = `Você completou ${challengeCompleted.size} de ${totalChallenges} desafios!`;
+                
+                // Scroll to score
+                setTimeout(() => {
+                    scoreDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 500);
+            }
+        }
+
+        function resetChallenge() {
+            // Clear all code editors
+            for (let i = 1; i <= totalChallenges; i++) {
+                document.getElementById(`code-${i}`).value = '';
+                const result = document.getElementById(`result-${i}`);
+                result.classList.remove('show', 'success', 'error');
+                result.innerHTML = '';
+            }
+
+            // Reset completed set
+            challengeCompleted.clear();
+
+            // Hide score
+            document.getElementById('challenge-score').style.display = 'none';
+
+            // Scroll to challenge section
+            document.getElementById('challenge').scrollIntoView({ behavior: 'smooth' });
+        }
     </script>
 </body>
 </html>
