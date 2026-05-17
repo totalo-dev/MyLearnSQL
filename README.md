@@ -135,9 +135,9 @@ FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT
 
 ---
 
-## 🚀 Como Usar
+## 🚀 Como Usar offline
 
-Nenhuma instalação é necessária. Basta:
+Basta:
 
 ```bash
 # Clone ou baixe o repositório
