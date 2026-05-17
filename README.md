@@ -18,6 +18,13 @@ Abra o arquivo `index.html` diretamente no navegador para visualizar a documenta
 
 ---
 
+## 🖥️ Site acess
+
+Abra [MyLearnSQL](https://totalo-dev.github.io/MyLearnSQL/?utm_source=chatgpt.com) para visualização sem necessidade de instalação.
+
+
+---
+
 ## 📂 Estrutura do Projeto
 
 ```txt
