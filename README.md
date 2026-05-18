@@ -3,6 +3,12 @@
 Estudos e referência prática baseados no curso de MySQL do professor Gustavo Guanabara.
 
 ---
+## 👥 Colaboradores
+
+Este projeto foi desenvolvido em parceria com:
+
+- João (Totalo) Muller — Front-end
+- (Felix) — Front-end
 
 ## 📋 Sobre o Projeto
 
