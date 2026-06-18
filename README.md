@@ -173,3 +173,8 @@ Este projeto é de uso educacional e pessoal. O conteúdo foi desenvolvido como 
 
 Automatically updated during repository processing.
 
+
+## Status do Projeto
+- Estado: em progresso
+- Fases: não definidas
+- Última verificação: 18/06/2026
